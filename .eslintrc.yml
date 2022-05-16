@@ -1,0 +1,36 @@
+env:
+  browser: true
+  es2021: true
+settings:
+  react:
+    version: detect
+extends:
+  - 'eslint:recommended'
+  - 'plugin:react/recommended'
+  - 'plugin:@typescript-eslint/recommended'
+  - 'plugin:@typescript-eslint/recommended-requiring-type-checking'
+parser: '@typescript-eslint/parser'
+parserOptions:
+  ecmaFeatures:
+    jsx: true
+  ecmaVersion: 13
+  sourceType: module
+  project:
+    - ./tsconfig.json
+plugins:
+  - react
+  - import
+  - '@typescript-eslint'
+rules:
+  max-len: [error, code: 120]
+  semi: [error, never]
+  import/no-default-export: error
+  object-curly-spacing: [error, always]
+  import/order: [error, newlines-between: always]
+  require-jsdoc: off
+  "@typescript-eslint/no-misused-promises": off
+  "@typescript-eslint/require-await": off
+  "@typescript-eslint/no-empty-function": off
+  "@typescript-eslint/no-unsafe-call": off
+  "@typescript-eslint/no-unsafe-assignment": off 
+  "@typescript-eslint/no-unsafe-member-access": off 
