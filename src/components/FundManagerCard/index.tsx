@@ -222,9 +222,9 @@ export const FundManagerCard = ({ fund, onClickInvest, onClickExit }: Props): JS
               <Typography noWrap variant="h6" color="text">
                 {fund.profile.name}
               </Typography>
-              <Typography noWrap variant="subtitle2" color="primary">
+              {/* <Typography noWrap variant="subtitle2" color="primary">
                 {fund.tags}
-              </Typography>
+              </Typography> */}
             </Box>
           </Box>
           <Divider />
