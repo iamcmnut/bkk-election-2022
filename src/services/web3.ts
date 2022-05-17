@@ -10,7 +10,7 @@ const abi = contract.abi
 
 const chainID = 97
 const targetChain = {
-  chainName: 'Binance Smart Chain - Testnet',
+  chainName: 'BSC - Testnet',
   chainId: `0x${chainID.toString(16)}`,
   nativeCurrency: { name: 'BNB', decimals: 18, symbol: 'BNB' },
   rpcUrls: ['https://data-seed-prebsc-1-s1.binance.org:8545'],

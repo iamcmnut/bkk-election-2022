@@ -1,4 +1,5 @@
 import { Order, Fund, Role, Investor, Market, RewardProgress, RewardSubmitForm } from '../state/types'
+import { connectAndSwitchNetwork } from '../services/web3'
 
 import { generateMarkets, getState, reset, save } from './mock-state'
 import { generateFollowers } from './generate-followers'
@@ -23,6 +24,7 @@ type BffResponse<T> = {
 const stupidClone = <T>(obj: T): T => JSON.parse(JSON.stringify(obj)) as T
 
 export const loadUserInvestorBff = async (): Promise<BffResponse<Investor>> => {
+  void connectAndSwitchNetwork()
   const { userInvestor } = getState()
   return {
     statusCode: 200,
