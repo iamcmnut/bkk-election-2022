@@ -21,6 +21,8 @@ import { FundDashboard } from './views/FundDashboard'
 import { startAutoFill } from './bff/auto-fill'
 import { CongratDialog } from './components/CongratDialog'
 import { startAutoManageFunds } from './bff/auto-manage-funds'
+import { Candidate } from './views/Candidate'
+import { Result } from './views/Result'
 
 export const App = (): JSX.Element => {
   const dispatch = useDispatch()
@@ -49,8 +51,8 @@ export const App = (): JSX.Element => {
     dispatch(loadTopFunds())
     //load tracking reward
     dispatch(loadRewardData())
-    startAutoFill()
-    startAutoManageFunds()
+    //startAutoFill()
+    //startAutoManageFunds()
   }, [])
 
   useEffect(() => {
@@ -62,38 +64,17 @@ export const App = (): JSX.Element => {
     dispatch(markAsShown(notiMessage))
   }
 
-  return <ThemeProvider theme={role == 'manager' && currPath == 'trade' ? dark : light}>
+  return <ThemeProvider theme={light}>
     <CssBaseline />
     <CampCssBaseline />
     <HeaderContainer />
     {/* <ProgressTrackingDrawer /> */}
     <CongratDialog />
-    {ready &&
-      <Routes>
-        <Route path="/" element={<Navigate to='/explore' replace={true} />} />
-        <Route path="/explore"
-          element={role === 'investor' ? <Explore /> : <Navigate to='/fund-dashboard' replace={true} />}
-        />
-        <Route path="/swap"
-          element={role === 'investor' ? <Swap /> : <Navigate to='/fund-dashboard' replace={true} />}
-        />
-        <Route path="/port"
-          element={role === 'investor' ? <Port /> : <Navigate to='/fund-dashboard' replace={true} />}
-        />
-        <Route path="/fund-dashboard" element={
-          role === 'manager' ? <FundDashboard /> : <Navigate to='/explore' replace={true} />
-        } />
-        <Route path="/trade"
-          element={
-            (role === 'manager') ?
-              (hasOwnFund || isInvestorLoading) ?
-                <Trade />
-                : <Navigate to='/fund-dashboard' replace />
-              : <Navigate to='/explore' replace={true} />
-          }
-        />
-      </Routes>
-    }
+    <Routes>
+      <Route path="/" element={<Explore />} />
+      <Route path="/candidate" element={<Explore />}/>
+      <Route path="/result" element={<Result />}/>
+    </Routes>
 
 
     {notiMessage?.level !== 'info' ? (

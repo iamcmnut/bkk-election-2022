@@ -14,14 +14,14 @@ export const CampCssBaseline = (): JSX.Element => {
           '-webkit-box-shadow': 'inset 0 0 6px rgba(0,0,0,0.00)'
         },
         '*::-webkit-scrollbar-thumb': {
-          backgroundColor: '#01203D',
+         // backgroundColor: '#01203D',
           borderRadius: '15px',
         },
         body: {
-          backgroundImage: `url(${CampBackgroundImage as string})`,
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: 'cover',
-          color: 'white',
+        //  backgroundImage: `url(${CampBackgroundImage as string})`,
+          //backgroundRepeat: 'no-repeat',
+          //backgroundSize: 'cover',
+          //color: 'white',
           fontFamily: '\'Lexend Deca\', sans-serif',
           margin: 0,
           fontWeight: 400,

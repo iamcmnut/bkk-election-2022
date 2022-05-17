@@ -28,8 +28,8 @@ export const HeaderContainer = (): JSX.Element => {
   )
 
   useEffect(() => {
-    const initRole: Role = currPath === 'fund-dashboard' || currPath === 'trade' ? 'manager' : 'investor'
-    dispatch(setRole(initRole))
+    //const initRole: Role = currPath === 'fund-dashboard' || currPath === 'trade' ? 'manager' : 'investor'
+    //dispatch(setRole(initRole))
   }, [])
 
   const roleChangeHandler = useCallback((newRole: Role) => {
