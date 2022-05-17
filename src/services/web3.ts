@@ -52,6 +52,7 @@ export const getCandidate = async (no: number) => {
       const point = await electionContract.candidates(ethers.BigNumber.from(no))
       return point
     } catch (err) {
+      console.log(err)
       throw err
     }
   } else {
@@ -71,6 +72,7 @@ export const vote = async (no: number) => {
       const txNo = await electionContract.vote(ethers.BigNumber.from(no))
       return txNo
     } catch (err) {
+      console.log(err)
       throw err
     }
   }
@@ -89,6 +91,7 @@ export const start = async () => {
       const txNo = await electionContract.start()
       return txNo
     } catch (err) {
+      console.log(err)
       throw err
     }
   }
@@ -107,6 +110,7 @@ export const stop = async () => {
       const txNo = await electionContract.stop()
       return txNo
     } catch (err) {
+      console.log(err)
       throw err
     }
   }
@@ -124,6 +128,7 @@ export const checkRights = async () => {
       const hasRights = await electionContract.checkRights()
       return hasRights
     } catch (err) {
+      console.log(err)
       throw err
     }
   } else {
