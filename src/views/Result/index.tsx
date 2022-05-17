@@ -17,35 +17,32 @@ import { FundManagerCard } from '../../components/FundManagerCard'
 import { Fund } from '../../state/types'
 import { RootState } from '../../state/store'
 import { getCandidates } from '../../services/web3'
+import { CandidateCard } from '../../components/CandidateCard'
 
 export const Result = (): JSX.Element | null => {
   const [sortedCandidates, setSortedCandidates] = useState<Fund[]>([])
   const candidates = useSelector((state: RootState) => state.funds.topFunds)
 
-
-
   useEffect(() => {
-    void loadScore()
-  }, [])
+    void getCandidates().then(result => {
+      const sortedCandidatess =
+        [...candidates.map((c, i) =>
+          ({ ...c, campScore: { ...c.campScore, return: result[i].toNumber() } }))]
+          .sort((c1, c2) => c2.campScore.return - c1.campScore.return)
+      setSortedCandidates(sortedCandidatess)
 
-  const loadScore = async () => {
-    const result = await getCandidates()
-    console.log(result)
-    const sortedCandidates =
-      [...candidates.map((c, i) =>
-        ({ ...c, campScore: { ...c.campScore, return: result[i].toNumber() } }))]
-        .sort((c1, c2) => c2.campScore.return - c1.campScore.return)
-    setSortedCandidates(sortedCandidates)
+      console.log(sortedCandidatess)
+    })
+  }, [candidates])
 
-  }
 
-  if (!candidates || candidates.length == 0 || !sortedCandidates||sortedCandidates.length==0) return null
+  if (!candidates || candidates.length == 0 || !sortedCandidates || sortedCandidates.length == 0) return null
 
 
 
   return <Box padding={5}>
     <Grid container justifyContent="center">
-      <FundManagerCard fund={
+      <CandidateCard fund={
         sortedCandidates[0]
       } onClickInvest={function (f: Fund): void {
         throw new Error('Function not implemented.')
@@ -54,12 +51,12 @@ export const Result = (): JSX.Element | null => {
       }} />
     </Grid>
     <Grid container justifyContent="center">
-      <FundManagerCard fund={sortedCandidates[1]} onClickInvest={function (f: Fund): void {
+      <CandidateCard fund={sortedCandidates[1]} onClickInvest={function (f: Fund): void {
         throw new Error('Function not implemented.')
       }} onClickExit={function (f: Fund): void {
         throw new Error('Function not implemented.')
       }} />
-      <FundManagerCard fund={sortedCandidates[2]} onClickInvest={function (f: Fund): void {
+      <CandidateCard fund={sortedCandidates[2]} onClickInvest={function (f: Fund): void {
         throw new Error('Function not implemented.')
       }} onClickExit={function (f: Fund): void {
         throw new Error('Function not implemented.')

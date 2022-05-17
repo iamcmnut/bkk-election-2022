@@ -237,9 +237,9 @@ export const CandidateCard = ({ fund, onClickInvest, onClickExit }: Props): JSX.
           </Box> */}
         </CardContent>
         <CardActions className='wrap-action' >
-          <Button variant="contained" fullWidth onClick={() => onClickInvest(fund)}>
-            <Typography>ลงคะแนน</Typography>
-          </Button>
+       
+            <Typography>{fund.campScore.return} คะแนน</Typography>
+         
         </CardActions>
       </Card>
     </FundCard>)
