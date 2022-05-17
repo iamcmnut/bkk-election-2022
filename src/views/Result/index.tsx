@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
+  Avatar,
   Box,
   Grid,
   Paper,
@@ -15,32 +16,34 @@ import { useSelector } from 'react-redux'
 import { FundManagerCard } from '../../components/FundManagerCard'
 import { Fund } from '../../state/types'
 import { RootState } from '../../state/store'
+import { getCandidates } from '../../services/web3'
+import { CandidateCard } from '../../components/CandidateCard'
 
-function createData(
-  name: string,
-  calories: number,
-  fat: number,
-  carbs: number,
-  protein: number,
-) {
-  return { name, calories, fat, carbs, protein }
-}
-
-export const Result = (): JSX.Element|null => {
-
+export const Result = (): JSX.Element | null => {
+  const [sortedCandidates, setSortedCandidates] = useState<Fund[]>([])
   const candidates = useSelector((state: RootState) => state.funds.topFunds)
-  if(!candidates || candidates.length==0)return null
-  const rows = [
-    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-    createData('Eclair', 262, 16.0, 24, 6.0),
-    createData('Cupcake', 305, 3.7, 67, 4.3),
-    createData('Gingerbread', 356, 16.0, 49, 3.9),
-  ]
+
+  useEffect(() => {
+    void getCandidates().then(result => {
+      const sortedCandidatess =
+        [...candidates.map((c, i) =>
+          ({ ...c, campScore: { ...c.campScore, return: result[i].toNumber() } }))]
+          .sort((c1, c2) => c2.campScore.return - c1.campScore.return)
+      setSortedCandidates(sortedCandidatess)
+
+      console.log(sortedCandidatess)
+    })
+  }, [candidates])
+
+
+  if (!candidates || candidates.length == 0 || !sortedCandidates || sortedCandidates.length == 0) return null
+
+
+
   return <Box padding={5}>
     <Grid container justifyContent="center">
-      <FundManagerCard fund={
-        candidates[0]
+      <CandidateCard fund={
+        sortedCandidates[0]
       } onClickInvest={function (f: Fund): void {
         throw new Error('Function not implemented.')
       }} onClickExit={function (f: Fund): void {
@@ -48,12 +51,12 @@ export const Result = (): JSX.Element|null => {
       }} />
     </Grid>
     <Grid container justifyContent="center">
-      <FundManagerCard fund={ candidates[1]} onClickInvest={function (f: Fund): void {
+      <CandidateCard fund={sortedCandidates[1]} onClickInvest={function (f: Fund): void {
         throw new Error('Function not implemented.')
       }} onClickExit={function (f: Fund): void {
         throw new Error('Function not implemented.')
       }} />
-      <FundManagerCard fund={ candidates[2]} onClickInvest={function (f: Fund): void {
+      <CandidateCard fund={sortedCandidates[2]} onClickInvest={function (f: Fund): void {
         throw new Error('Function not implemented.')
       }} onClickExit={function (f: Fund): void {
         throw new Error('Function not implemented.')
@@ -64,26 +67,28 @@ export const Result = (): JSX.Element|null => {
       <Table aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>Dessert (100g serving)</TableCell>
-            <TableCell align="right">Calories</TableCell>
-            <TableCell align="right">Fat&nbsp;(g)</TableCell>
-            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-            <TableCell align="right">Protein&nbsp;(g)</TableCell>
+            <TableCell>อันดับ</TableCell>
+            <TableCell>ชื่อผู้สมัคร</TableCell>
+            <TableCell align="right">หมายเลข</TableCell>
+            <TableCell align="right">คะแนน</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {sortedCandidates.filter((e, i) => i > 2).map((c, i2) => (
             <TableRow
-              key={row.name}
+              key={`candi_${i2}`}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                {row.name}
+                {i2 + 4}
               </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
+              <TableCell component="th" scope="row">
+                <Avatar src={c.profile.picUri}></Avatar>
+                {c.profile.name}
+              </TableCell>
+              <TableCell align="right">   {c.campScore.consistency}</TableCell>
+              <TableCell align="right"> {c.campScore.return}</TableCell>
+
             </TableRow>
           ))}
         </TableBody>
