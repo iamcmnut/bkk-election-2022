@@ -33,7 +33,7 @@ export type Props = {
 export const FundManagerCard = ({ fund, onClickInvest, onClickExit }: Props): JSX.Element => {
   const [loading,setLoading] = useState(true)
   const [isFavorite, setFavorite] = useState(false)
-  const [score, setScore] = useState(0)
+ 
 
 
   useEffect(() => {
@@ -44,7 +44,7 @@ export const FundManagerCard = ({ fund, onClickInvest, onClickExit }: Props): JS
     
    const  result = await getCandidate(1)
    setLoading(false)
-   setScore(result)
+  
   }
 
   function toggleFavorite(isFavorite: boolean) {
@@ -229,12 +229,12 @@ export const FundManagerCard = ({ fund, onClickInvest, onClickExit }: Props): JS
           </Box>
           <Divider />
 
-          <Box className='fund-content-row'>
+          {/* <Box className='fund-content-row'>
           {loading?<Skeleton animation="wave" width='50%' height={40} />: 
           <Typography noWrap variant="h6" color="text">
             {score} คะแนน
             </Typography> }
-          </Box>
+          </Box> */}
         </CardContent>
         <CardActions className='wrap-action' >
           <Button variant="contained" fullWidth onClick={() => onClickInvest(fund)}>
