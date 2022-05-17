@@ -1,15 +1,26 @@
+import { ethers } from 'ethers'
+
 import contract from '../contracts/Election.json'
+import { Election } from '../contracts/typechain/Election'
 
 const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3"
 const abi = contract.abi
 
-export const checkWalletIsConnected = () => {
+export const checkWalletIsConnected = async () => {
   const ethereum = (window as any).ethereum
   if (!ethereum) {
     console.log('Make sure you have metamask installed and logged in')
     return
   } else {
     console.log('Wallet is connected')
+  }
+
+  const accounts = await ethereum.request({ method: 'eth_accounts' })
+
+  if (accounts.length !== 0) {
+    console.log("Found an account address: ", accounts[0])
+  } else {
+    console.log("No account found")
   }
 }
 
@@ -27,6 +38,95 @@ export const connectWalletHandler = async () => {
   }
 }
 
-export const getCandidates = () => {}
+export const getCandidate = async (no: number) => {
+  no = no - 1
 
-export const vote = () => {}
+  const ethereum = (window as any).ethereum
+  if (ethereum) {
+    const provider = new ethers.providers.Web3Provider(ethereum)
+    const signer = provider.getSigner()
+    const electionContract = new ethers.Contract(contractAddress, abi, signer) as Election
+
+    try {
+      console.log('Initialize getCandidate')
+      const point = await electionContract.candidates(ethers.BigNumber.from(no))
+      return point
+    } catch (err) {
+      throw err
+    }
+  } else {
+    throw new Error("Please install MetaMask")
+  }
+}
+
+export const vote = async (no: number) => {
+  const ethereum = (window as any).ethereum
+  if (ethereum) {
+    const provider = new ethers.providers.Web3Provider(ethereum)
+    const signer = provider.getSigner()
+    const electionContract = new ethers.Contract(contractAddress, abi, signer) as Election
+
+    try {
+      console.log('Initialize vote')
+      const txNo = await electionContract.vote(ethers.BigNumber.from(no))
+      return txNo
+    } catch (err) {
+      throw err
+    }
+  }
+}
+
+export const start = async () => {
+  const id = 1
+  const ethereum = (window as any).ethereum
+  if (ethereum) {
+    const provider = new ethers.providers.Web3Provider(ethereum)
+    const signer = provider.getSigner()
+    const electionContract = new ethers.Contract(contractAddress, abi, signer) as Election
+
+    try {
+      console.log('Initialize start')
+      const txNo = await electionContract.start()
+      return txNo
+    } catch (err) {
+      throw err
+    }
+  }
+}
+
+export const stop = async () => {
+  const id = 1
+  const ethereum = (window as any).ethereum
+  if (ethereum) {
+    const provider = new ethers.providers.Web3Provider(ethereum)
+    const signer = provider.getSigner()
+    const electionContract = new ethers.Contract(contractAddress, abi, signer) as Election
+
+    try {
+      console.log('Initialize stop')
+      const txNo = await electionContract.stop()
+      return txNo
+    } catch (err) {
+      throw err
+    }
+  }
+}
+
+export const checkRights = async () => {
+  const ethereum = (window as any).ethereum
+  if (ethereum) {
+    const provider = new ethers.providers.Web3Provider(ethereum)
+    const signer = provider.getSigner()
+    const electionContract = new ethers.Contract(contractAddress, abi, signer) as Election
+
+    try {
+      console.log('Initialize checkRights')
+      const hasRights = await electionContract.checkRights()
+      return hasRights
+    } catch (err) {
+      throw err
+    }
+  } else {
+    return false
+  }
+}
