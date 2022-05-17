@@ -60,6 +60,27 @@ export const getCandidate = async (no: number) => {
   }
 }
 
+export const getCandidates = async () => {
+  const ethereum = (window as any).ethereum
+  if (ethereum) {
+    const provider = new ethers.providers.Web3Provider(ethereum)
+    const signer = provider.getSigner()
+    const electionContract = new ethers.Contract(contractAddress, abi, signer) as Election
+
+    try {
+      console.log('Initialize getCandidate')
+      const points = await electionContract.getCandidates()
+      console.log("Points", points)
+      return points
+    } catch (err) {
+      console.log(err)
+      throw err
+    }
+  } else {
+    throw new Error("Please install MetaMask")
+  }
+}
+
 export const vote = async (no: number) => {
   const ethereum = (window as any).ethereum
   if (ethereum) {
@@ -133,5 +154,25 @@ export const checkRights = async () => {
     }
   } else {
     return false
+  }
+}
+
+export const getTotalVotes = async () => {
+  const ethereum = (window as any).ethereum
+
+  if (ethereum) {
+    const provider = new ethers.providers.Web3Provider(ethereum)
+    const signer = provider.getSigner()
+    const electionContract = new ethers.Contract(contractAddress, abi, signer) as Election
+
+    try {
+      console.log('Initialize getTotalVotes')
+      const totalVotes = await electionContract.totalVotes()
+      console.log("totalVotes", totalVotes)
+      return totalVotes
+    } catch (err) {
+      console.log(err)
+      throw err
+    }
   }
 }
