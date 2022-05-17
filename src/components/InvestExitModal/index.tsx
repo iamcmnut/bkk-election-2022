@@ -109,40 +109,6 @@ export const InvestExitModal = ({
       }}
       BackdropProps={{ style: { backgroundColor: 'rgba(244, 238, 255, 0.6)' } }}
     >
-      <DialogTitle >
-        <Box sx={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}>
-          <Box padding={'4px'} style={{
-            backgroundColor: 'rgba(255, 255, 255, 0.15)',
-            borderRadius: 10,
-          }}>
-            <Button
-              style={{
-                borderRadius: 10,
-                color: 'white'
-              }}
-              fullWidth
-              onClick={() => onClickInvest(fund)}
-              variant={mode === 'invest' ? 'contained' : 'text'}
-              color='primary'
-              sx={{ width: '50%' }}>Invest</Button>
-            <Button
-              style={{
-                borderRadius: 10,
-                color: 'white'
-              }}
-              fullWidth
-              onClick={() => onClickExit(fund)}
-              variant={mode === 'exit' ? 'contained' : 'text'}
-              color='secondary'
-              sx={{ width: '50%' }}>
-              Exit</Button>
-          </Box>
-        </Box>
-      </DialogTitle>
       <DialogContent>
         < DialogContentText>
           <Box
@@ -163,12 +129,11 @@ export const InvestExitModal = ({
             />
             <Box padding={2}>
               <Typography variant='subtitle1' fontWeight='bold'>{fund?.profile.name}</Typography>
-              <Typography variant='subtitle2' color='primary'>{fund?.tags}</Typography>
-              <Typography variant='body2'>Rank : -</Typography>
+              <Typography variant='body2'>หมายเลข: {fund?.campScore.consistency}</Typography>
             </Box>
           </Box>
-          <Typography pt={1} variant='subtitle1'>Current balance (USDT)</Typography>
-          <Box
+          {/* <Typography pt={1} variant='subtitle1'>Current balance (USDT)</Typography> */}
+          {/* <Box
             display='flex'
             justifyContent='space-between'
             alignItems='center'
@@ -184,9 +149,9 @@ export const InvestExitModal = ({
             <Typography variant='h6' color='rgba(255, 255, 255, 0.5)'>
               {totalUsdtBalance}
             </Typography>
-          </Box>
-          <Typography pt={2} variant='subtitle1'>Invested (USDT)</Typography>
-          <Box
+          </Box> */}
+          {/* <Typography pt={2} variant='subtitle1'>Invested (USDT)</Typography> */}
+          {/* <Box
             display='flex'
             justifyContent='space-between'
             alignItems='center'
@@ -202,10 +167,11 @@ export const InvestExitModal = ({
             <Typography variant='h6' color='rgba(255, 255, 255, 0.5)'>
               {totalInvestedUsdt}
             </Typography>
-          </Box>
+          </Box> */}
           <Box pt={2} />
-          <Typography variant="subtitle1">You {mode}</Typography>
-          <OutlinedInput
+          <Typography variant="subtitle1">ท่านต้องการใช้สิทธิ์เพียง 1 เดียวของท่าน</Typography>
+          <Typography variant="subtitle1">เพื่อเลือกผู้สมัครรายนี้ใช่หรือไม่?</Typography>
+          {/* <OutlinedInput
             sx={{
               paddingRight: '0px',
               borderRadius: '6.5px',
@@ -238,11 +204,11 @@ export const InvestExitModal = ({
             value={amount}
             placeholder='0'
             onChange={onAmountChange}
-          />
+          /> */}
           <Box pt={3} />
-          <SpendPercentButtonGroup
+          {/* <SpendPercentButtonGroup
             onSelectPercent={setActionVolume}
-          />
+          /> */}
         </DialogContentText>
       </DialogContent >
       <DialogActions
@@ -256,7 +222,7 @@ export const InvestExitModal = ({
             backgroundColor: mode === 'invest' ? '#F07645' : '#144E93',
             borderColor: mode === 'invest' ? '#A85230 !important' : 'inheried'
           }}
-          onClick={submitHandler}>{mode === 'invest' ? 'Invest' : 'Exit'}
+          onClick={submitHandler}>{mode === 'invest' ? 'ลงคะแนน' : 'Exit'}
         </Button>
       </DialogActions>
     </Dialog >

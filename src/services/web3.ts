@@ -5,8 +5,17 @@ import { ethers } from 'ethers'
 import contract from '../contracts/Election.json'
 import { Election } from '../contracts/typechain/Election'
 
-const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3"
+const contractAddress = "0x4FE16b69B96Bd84487320997a7Feb55079fbFfc9"
 const abi = contract.abi
+
+const chainID = 97
+const targetChain = {
+  chainName: 'Binance Smart Chain - Testnet',
+  chainId: `0x${chainID.toString(16)}`,
+  nativeCurrency: { name: 'BNB', decimals: 18, symbol: 'BNB' },
+  rpcUrls: ['https://data-seed-prebsc-1-s1.binance.org:8545'],
+  blockExplorerUrls: ['https://testnet.bscscan.com'],
+}
 
 export const checkWalletIsConnected = async () => {
   const ethereum = (window as any).ethereum
@@ -173,6 +182,74 @@ export const getTotalVotes = async () => {
       console.log("totalVotes", totalVotes)
       return totalVotes
     } catch (err) {
+      console.log(err)
+      throw err
+    }
+  }
+}
+
+export const switchNetwork = async () => {
+  const ethereum = (window as any).ethereum
+
+  if (ethereum && ethereum.networkVersion !== chainID) {
+    try {
+      await ethereum.request({
+        method: 'wallet_switchEthereumChain',
+        params: [{ chainId: targetChain.chainId }]
+      })
+    } catch (err) {
+
+      if ((err as any).code === 4902) {
+        ethereum.request({
+          method: 'wallet_addEthereumChain',
+          params: [
+            {
+              chainName: 'Polygon Mainnet',
+              chainId: targetChain.chainId,
+              nativeCurrency: { name: 'MATIC', decimals: 18, symbol: 'MATIC' },
+              rpcUrls: ['https://polygon-rpc.com/']
+            }
+          ]
+        })
+      }
+
+      console.log(err)
+      throw err
+    }
+  }
+}
+
+export const connectAndSwitchNetwork = async () => {
+  const ethereum = (window as any).ethereum
+  if (!ethereum) {
+    alert("Please install MetaMask")
+    return
+  }
+
+  try {
+    const account = await ethereum.request({ method: 'eth_requestAccounts' })
+    console.log("Found an account address: ", account[0])
+  } catch (err) {
+    console.log(err)
+  }
+
+  if (ethereum.networkVersion !== chainID) {
+    try {
+      await ethereum.request({
+        method: 'wallet_switchEthereumChain',
+        params: [{ chainId: targetChain.chainId }]
+      })
+    } catch (err) {
+
+      if ((err as any).code === 4902) {
+        ethereum.request({
+          method: 'wallet_addEthereumChain',
+          params: [
+            targetChain
+          ]
+        })
+      }
+
       console.log(err)
       throw err
     }
