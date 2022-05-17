@@ -12,4 +12,4 @@ export default {
 export const Primary = () => <Header role="investor"
   onRoleChange={() => undefined}
   onResetState={() => undefined}
-  currPath='explore' balance={undefined} canTrade={true}></Header>
+  currPath='candidate' balance={undefined} canTrade={true}></Header>

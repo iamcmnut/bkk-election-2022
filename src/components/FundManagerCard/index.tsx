@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState ,useEffect } from 'react'
 import { styled } from '@mui/system'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import {
@@ -14,11 +14,13 @@ import {
   CardHeader,
   IconButton,
   CardMedia,
+  Skeleton,
 } from '@mui/material'
 
-import miniChart from '../../assets/mini_chart.png'
-//import whaleHunter from '../../assets/whale_hunter.png'
+
 import { Fund } from '../../state/types'
+import { getCandidate } from '../../services/web3'
+
 
 
 
@@ -29,7 +31,21 @@ export type Props = {
 }
 
 export const FundManagerCard = ({ fund, onClickInvest, onClickExit }: Props): JSX.Element => {
+  const [loading,setLoading] = useState(true)
   const [isFavorite, setFavorite] = useState(false)
+  const [score, setScore] = useState(0)
+
+
+  useEffect(() => {
+    void loadCandidate()
+  }, [])
+
+  const loadCandidate = async ()=>{
+    
+   const  result = await getCandidate(1)
+   setLoading(false)
+   setScore(result)
+  }
 
   function toggleFavorite(isFavorite: boolean) {
     const toggleValue = !isFavorite
@@ -197,13 +213,10 @@ export const FundManagerCard = ({ fund, onClickInvest, onClickExit }: Props): JS
           height="400"
           image={fund.profile.picUri}
           alt="green iguana"
-          
         >
         </CardMedia>
         {/* <Avatar alt="Remy Sharp" src={fund.profile.picUri} className="fund-avatar" /> */}
-
         <CardContent className="fund-content" >
-
           <Box className='fund-content-row'>
             <Box>
               <Typography noWrap variant="h6" color="text">
@@ -213,17 +226,16 @@ export const FundManagerCard = ({ fund, onClickInvest, onClickExit }: Props): JS
                 {fund.tags}
               </Typography>
             </Box>
-
           </Box>
           <Divider />
 
           <Box className='fund-content-row'>
-            <Typography noWrap variant="h6" color="text">
-              {Math.floor(fund.campScore.return)} คะแนน
-            </Typography>
+          {loading?<Skeleton animation="wave" width='50%' height={40} />: 
+          <Typography noWrap variant="h6" color="text">
+            {score} คะแนน
+            </Typography> }
           </Box>
         </CardContent>
-
         <CardActions className='wrap-action' >
           <Button variant="contained" fullWidth onClick={() => onClickInvest(fund)}>
             <Typography>ลงคะแนน</Typography>
