@@ -23,11 +23,13 @@ interface ElectionInterface extends ethers.utils.Interface {
   functions: {
     "candidates(uint256)": FunctionFragment;
     "checkRights()": FunctionFragment;
+    "getCandidates()": FunctionFragment;
     "isOpen()": FunctionFragment;
     "owner()": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
     "start()": FunctionFragment;
     "stop()": FunctionFragment;
+    "totalVotes()": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
     "vote(uint256)": FunctionFragment;
   };
@@ -40,6 +42,10 @@ interface ElectionInterface extends ethers.utils.Interface {
     functionFragment: "checkRights",
     values?: undefined
   ): string;
+  encodeFunctionData(
+    functionFragment: "getCandidates",
+    values?: undefined
+  ): string;
   encodeFunctionData(functionFragment: "isOpen", values?: undefined): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(
@@ -48,6 +54,10 @@ interface ElectionInterface extends ethers.utils.Interface {
   ): string;
   encodeFunctionData(functionFragment: "start", values?: undefined): string;
   encodeFunctionData(functionFragment: "stop", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "totalVotes",
+    values?: undefined
+  ): string;
   encodeFunctionData(
     functionFragment: "transferOwnership",
     values: [string]
@@ -59,6 +69,10 @@ interface ElectionInterface extends ethers.utils.Interface {
     functionFragment: "checkRights",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "getCandidates",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "isOpen", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(
@@ -67,6 +81,7 @@ interface ElectionInterface extends ethers.utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "start", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "stop", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "totalVotes", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "transferOwnership",
     data: BytesLike
@@ -135,6 +150,8 @@ export class Election extends BaseContract {
 
     checkRights(overrides?: CallOverrides): Promise<[boolean]>;
 
+    getCandidates(overrides?: CallOverrides): Promise<[BigNumber[]]>;
+
     isOpen(overrides?: CallOverrides): Promise<[boolean]>;
 
     owner(overrides?: CallOverrides): Promise<[string]>;
@@ -151,6 +168,8 @@ export class Election extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    totalVotes(overrides?: CallOverrides): Promise<[BigNumber]>;
+
     transferOwnership(
       newOwner: string,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -165,6 +184,8 @@ export class Election extends BaseContract {
   candidates(arg0: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
   checkRights(overrides?: CallOverrides): Promise<boolean>;
+
+  getCandidates(overrides?: CallOverrides): Promise<BigNumber[]>;
 
   isOpen(overrides?: CallOverrides): Promise<boolean>;
 
@@ -181,6 +202,8 @@ export class Election extends BaseContract {
   stop(
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
+
+  totalVotes(overrides?: CallOverrides): Promise<BigNumber>;
 
   transferOwnership(
     newOwner: string,
@@ -200,6 +223,8 @@ export class Election extends BaseContract {
 
     checkRights(overrides?: CallOverrides): Promise<boolean>;
 
+    getCandidates(overrides?: CallOverrides): Promise<BigNumber[]>;
+
     isOpen(overrides?: CallOverrides): Promise<boolean>;
 
     owner(overrides?: CallOverrides): Promise<string>;
@@ -209,6 +234,8 @@ export class Election extends BaseContract {
     start(overrides?: CallOverrides): Promise<void>;
 
     stop(overrides?: CallOverrides): Promise<void>;
+
+    totalVotes(overrides?: CallOverrides): Promise<BigNumber>;
 
     transferOwnership(
       newOwner: string,
@@ -244,6 +271,8 @@ export class Election extends BaseContract {
 
     checkRights(overrides?: CallOverrides): Promise<BigNumber>;
 
+    getCandidates(overrides?: CallOverrides): Promise<BigNumber>;
+
     isOpen(overrides?: CallOverrides): Promise<BigNumber>;
 
     owner(overrides?: CallOverrides): Promise<BigNumber>;
@@ -259,6 +288,8 @@ export class Election extends BaseContract {
     stop(
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
+
+    totalVotes(overrides?: CallOverrides): Promise<BigNumber>;
 
     transferOwnership(
       newOwner: string,
@@ -279,6 +310,8 @@ export class Election extends BaseContract {
 
     checkRights(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    getCandidates(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     isOpen(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -294,6 +327,8 @@ export class Election extends BaseContract {
     stop(
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
+
+    totalVotes(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     transferOwnership(
       newOwner: string,
