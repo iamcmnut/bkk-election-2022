@@ -31,9 +31,9 @@ export const ExploreContainer = ({ onClickInvest, onClickExit }: Input): JSX.Ele
       <Typography variant="h5" mt={5} mb={6}>ท่านมี 1 คะแนนสำหรับการโหวต</Typography>
     </Grid>
     <Grid md={3} />
-    <Grid container justifyContent='center' xs>
+    <Grid container justifyContent='center' xs paddingX={3}>
       {topFunds.map((f: Fund) => (
-        <Grid item key={f.fundAddress} spacing={3} md={3}>
+        <Grid item key={f.fundAddress} spacing={3} md={4}>
           <Box >
             <FundManagerCard
               fund={f}
