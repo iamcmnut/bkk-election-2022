@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
   Box,
   Grid,
@@ -9,11 +9,12 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-
 } from '@mui/material'
+import { useSelector } from 'react-redux'
 
 import { FundManagerCard } from '../../components/FundManagerCard'
 import { Fund } from '../../state/types'
+import { RootState } from '../../state/store'
 
 function createData(
   name: string,
@@ -25,7 +26,10 @@ function createData(
   return { name, calories, fat, carbs, protein }
 }
 
-export const Result = (): JSX.Element => {
+export const Result = (): JSX.Element|null => {
+
+  const candidates = useSelector((state: RootState) => state.funds.topFunds)
+  if(!candidates || candidates.length==0)return null
   const rows = [
     createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
     createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
@@ -35,85 +39,21 @@ export const Result = (): JSX.Element => {
   ]
   return <Box padding={5}>
     <Grid container justifyContent="center">
-      <FundManagerCard fund={{
-        fundAddress: '',
-        performanceFeePercent: 0,
-        campScore: {
-          return: 0,
-          risk: 0,
-          riskAdjustedReturn: 0,
-          consistency: 0
-        },
-        invested: 0,
-        followers: [],
-        orders: [],
-        assets: {
-          tokens: []
-        },
-        tags: [],
-        profile: {
-          name: '',
-          picUri: ''
-        },
-        createdAt: '',
-        updatedAt: ''
-      }} onClickInvest={function (f: Fund): void {
+      <FundManagerCard fund={
+        candidates[0]
+      } onClickInvest={function (f: Fund): void {
         throw new Error('Function not implemented.')
       }} onClickExit={function (f: Fund): void {
         throw new Error('Function not implemented.')
       }} />
     </Grid>
     <Grid container justifyContent="center">
-      <FundManagerCard fund={{
-        fundAddress: '',
-        performanceFeePercent: 0,
-        campScore: {
-          return: 0,
-          risk: 0,
-          riskAdjustedReturn: 0,
-          consistency: 0
-        },
-        invested: 0,
-        followers: [],
-        orders: [],
-        assets: {
-          tokens: []
-        },
-        tags: [],
-        profile: {
-          name: '',
-          picUri: ''
-        },
-        createdAt: '',
-        updatedAt: ''
-      }} onClickInvest={function (f: Fund): void {
+      <FundManagerCard fund={ candidates[1]} onClickInvest={function (f: Fund): void {
         throw new Error('Function not implemented.')
       }} onClickExit={function (f: Fund): void {
         throw new Error('Function not implemented.')
       }} />
-      <FundManagerCard fund={{
-        fundAddress: '',
-        performanceFeePercent: 0,
-        campScore: {
-          return: 0,
-          risk: 0,
-          riskAdjustedReturn: 0,
-          consistency: 0
-        },
-        invested: 0,
-        followers: [],
-        orders: [],
-        assets: {
-          tokens: []
-        },
-        tags: [],
-        profile: {
-          name: '',
-          picUri: ''
-        },
-        createdAt: '',
-        updatedAt: ''
-      }} onClickInvest={function (f: Fund): void {
+      <FundManagerCard fund={ candidates[2]} onClickInvest={function (f: Fund): void {
         throw new Error('Function not implemented.')
       }} onClickExit={function (f: Fund): void {
         throw new Error('Function not implemented.')

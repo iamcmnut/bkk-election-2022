@@ -40,7 +40,7 @@ export const connectWalletHandler = async () => {
   }
 }
 
-export const getCandidate = async (no: number) => {
+export const getCandidate = async (no: number):Promise<ethers.BigNumber> => {
   no = no - 1
 
   const ethereum = (window as any).ethereum
@@ -62,7 +62,7 @@ export const getCandidate = async (no: number) => {
   }
 }
 
-export const getCandidates = async () => {
+export const getCandidates = async ():Promise<ethers.BigNumber[]> => {
   const ethereum = (window as any).ethereum
   if (ethereum) {
     const provider = new ethers.providers.Web3Provider(ethereum)
