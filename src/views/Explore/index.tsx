@@ -6,7 +6,6 @@ import { InvestExitModalContainer } from '../../containers/InvestExitModalContai
 import { PrototypeWarningModalContainer } from '../../containers/PrototypeWarningModalContainer'
 import { Fund } from '../../state/types'
 import { loadExplorePage } from '../../state/api-actions'
-import { checkWalletIsConnected, connectWalletHandler } from '../../services/web3'
 
 
 export const Explore = (): JSX.Element => {
@@ -40,11 +39,9 @@ export const Explore = (): JSX.Element => {
 
   useEffect(() => {
     dispatch(loadExplorePage())
-    checkWalletIsConnected()
   }, [])
 
   return <div className='container'>
-    <button onClick={connectWalletHandler}>Connect</button>
     <ExploreContainer onClickInvest={onClickInvest} onClickExit={onClickExit} />
     <InvestExitModalContainer
       onClose={onInvestExitClose}
