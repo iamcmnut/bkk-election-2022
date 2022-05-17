@@ -19,26 +19,34 @@ import { RootState } from '../../state/store'
 import { getCandidates } from '../../services/web3'
 
 export const Result = (): JSX.Element | null => {
-  const [scores ,setScores] = useState(null)
+  const [sortedCandidates, setSortedCandidates] = useState<Fund[]>([])
   const candidates = useSelector((state: RootState) => state.funds.topFunds)
-  if (!candidates || candidates.length == 0) return null
+
+
 
   useEffect(() => {
     void loadScore()
   }, [])
 
-  const loadScore = async()=>{
-  const result =  await getCandidates()
-  console.log(result)
-  //setScores(result)
+  const loadScore = async () => {
+    const result = await getCandidates()
+    console.log(result)
+    const sortedCandidates =
+      [...candidates.map((c, i) =>
+        ({ ...c, campScore: { ...c.campScore, return: result[i].toNumber() } }))]
+        .sort((c1, c2) => c2.campScore.return - c1.campScore.return)
+    setSortedCandidates(sortedCandidates)
+
   }
+
+  if (!candidates || candidates.length == 0 || !sortedCandidates||sortedCandidates.length==0) return null
 
 
 
   return <Box padding={5}>
     <Grid container justifyContent="center">
       <FundManagerCard fund={
-        candidates[0]
+        sortedCandidates[0]
       } onClickInvest={function (f: Fund): void {
         throw new Error('Function not implemented.')
       }} onClickExit={function (f: Fund): void {
@@ -46,12 +54,12 @@ export const Result = (): JSX.Element | null => {
       }} />
     </Grid>
     <Grid container justifyContent="center">
-      <FundManagerCard fund={candidates[1]} onClickInvest={function (f: Fund): void {
+      <FundManagerCard fund={sortedCandidates[1]} onClickInvest={function (f: Fund): void {
         throw new Error('Function not implemented.')
       }} onClickExit={function (f: Fund): void {
         throw new Error('Function not implemented.')
       }} />
-      <FundManagerCard fund={candidates[2]} onClickInvest={function (f: Fund): void {
+      <FundManagerCard fund={sortedCandidates[2]} onClickInvest={function (f: Fund): void {
         throw new Error('Function not implemented.')
       }} onClickExit={function (f: Fund): void {
         throw new Error('Function not implemented.')
@@ -69,7 +77,7 @@ export const Result = (): JSX.Element | null => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {candidates.filter((e, i) => i > 2).map((c, i2) => (
+          {sortedCandidates.filter((e, i) => i > 2).map((c, i2) => (
             <TableRow
               key={`candi_${i2}`}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
