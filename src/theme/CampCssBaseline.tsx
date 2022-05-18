@@ -22,7 +22,7 @@ export const CampCssBaseline = (): JSX.Element => {
           //backgroundRepeat: 'no-repeat',
           //backgroundSize: 'cover',
           //color: 'white',
-          fontFamily: '\'Lexend Deca\', sans-serif',
+          fontFamily: '\'Kanit\', sans-serif',
           margin: 0,
           fontWeight: 400,
         }

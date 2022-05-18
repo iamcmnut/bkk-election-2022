@@ -31,18 +31,18 @@ export const Header = ({ role, onRoleChange, currPath, balance, canTrade, onRese
     display='flex'
     flexDirection='row'
     justifyContent='space-between'
-    style={{ backgroundColor:  '#082746' }}
+    style={{ backgroundColor: '#082746', fontFamily: 'Kanit' }}
   >
     <Box flexDirection='row' display='flex' alignItems='center'>
       <img src={logo as string} height={34} />
       <Box width={40} />
       <Box flexDirection='row' display='flex' alignItems='center'>
             <Link href="/candidate" className={currPath === 'candidate' ? 'link active' : 'link'}>
-              <Typography variant="h6">ผู้สมัคร</Typography>
+              <Typography variant="h6" style={{ fontFamily: 'Kanit' }}>ผู้สมัคร</Typography>
             </Link>
             <Box width={20} />
           <Link href="/result" className={currPath === 'result' ? 'link active' : 'link'}>
-              <Typography variant="h6">ผลโหวต</Typography>
+              <Typography variant="h6" style={{ fontFamily: 'Kanit' }}>ผลโหวต</Typography>
             </Link>
           </Box>
     </Box>
