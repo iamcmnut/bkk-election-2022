@@ -10,17 +10,16 @@ import { Election } from '../contracts/typechain/Election'
 const contractAddress = "0x5fbdb2315678afecb367f032d93f642f64180aa3"
 const abi = contract.abi
 
-const chainID = 31337
+const chainID = 97
 const targetChain = {
-  chainName: 'Local',
+  chainName: 'BSC - Testnet',
   chainId: `0x${chainID.toString(16)}`,
-  nativeCurrency: { name: 'ETH', decimals: 18, symbol: 'ETH' },
-  rpcUrls: ['http://localhost:8545'],
-  // blockExplorerUrls: ['https://testnet.bscscan.com'],
+  nativeCurrency: { name: 'BNB', decimals: 18, symbol: 'BNB' },
+  rpcUrls: ['https://data-seed-prebsc-1-s1.binance.org:8545'],
+  blockExplorerUrls: ['https://testnet.bscscan.com'],
 }
 
-const provider = new Web3.providers.HttpProvider('http://localhost:8545"')
-const web3 = new Web3(Web3.givenProvider || "http://localhost:8545")
+const web3 = new Web3(Web3.givenProvider || "https://data-seed-prebsc-1-s1.binance.org:8545")
 
 export const checkWalletIsConnected = async () => {
   const ethereum = (window as any).ethereum
