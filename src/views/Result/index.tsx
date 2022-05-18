@@ -90,8 +90,8 @@ export const Result = (): JSX.Element | null => {
       <Table aria-label="simple table">
         <TableHead>
           <TableRow style={{ fontFamily: 'Kanit' }}>
-            <TableCell style={{ fontFamily: 'Kanit' }}>อันดับ</TableCell>
-            <TableCell></TableCell>
+            <TableCell width='10px' size='small' style={{ fontFamily: 'Kanit' }}>อันดับ</TableCell>
+            <TableCell width='30px' size='small'></TableCell>
             <TableCell style={{ fontFamily: 'Kanit' }}>ชื่อผู้สมัคร</TableCell>
             <TableCell align="right" style={{ fontFamily: 'Kanit' }}>หมายเลข</TableCell>
             <TableCell align="right" style={{ fontFamily: 'Kanit' }}>คะแนน</TableCell>
@@ -103,13 +103,13 @@ export const Result = (): JSX.Element | null => {
               key={`candi_${i2}`}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
-              <TableCell component="th" scope="row">
+              <TableCell size='small' align='center'>
                 {i2 + 4}
               </TableCell>
-              <TableCell component="th" scope="row">
+              <TableCell  size='small' >
                 <Avatar src={c.profile.picUri}></Avatar>
               </TableCell>
-              <TableCell component="th" scope="row" style={{ fontFamily: 'Kanit' }}>
+              <TableCell style={{ fontFamily: 'Kanit' }}>
                 {c.profile.name}
               </TableCell>
               <TableCell align="right" style={{ fontFamily: 'Kanit' }}>
