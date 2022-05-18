@@ -89,8 +89,12 @@ export const Result = (): JSX.Element | null => {
               <TableCell component="th" scope="row" style={{ fontFamily: 'Kanit' }}>
                 {c.profile.name}
               </TableCell>
-              <TableCell align="right" style={{ fontFamily: 'Kanit' }}>   {c.campScore.consistency}</TableCell>
-              <TableCell align="right" style={{ fontFamily: 'Kanit' }}> {c.campScore.return.toLocaleString('en')}</TableCell>
+              <TableCell align="right" style={{ fontFamily: 'Kanit' }}>
+                {c.campScore.consistency}
+              </TableCell>
+              <TableCell align="right" style={{ fontFamily: 'Kanit' }}>
+                {c.campScore.return.toLocaleString('en')}
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

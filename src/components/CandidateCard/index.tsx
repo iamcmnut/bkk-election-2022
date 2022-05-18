@@ -228,7 +228,7 @@ export const CandidateCard = ({ fund, onClickInvest, onClickExit }: Props): JSX.
         </CardHeader> */}
         <CardMedia
           component="img"
-          height="400"
+          height="300"
           image={fund.profile.picUri}
           alt="green iguana"
         >
