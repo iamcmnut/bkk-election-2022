@@ -97,7 +97,6 @@ export const InvestExitModal = ({
       BackdropProps={{ style: { backgroundColor: 'rgba(244, 238, 255, 0.6)' } }}
     >
       <DialogContent>
-        <Avatar style={{ height: '64px', width: '64px', }} src={fund?.profile.picUri} />
         < DialogContentText>
           <Box
             display='flex'
@@ -107,14 +106,16 @@ export const InvestExitModal = ({
             height={75}
             borderRadius='10px'
             sx={{
-              backgroundColor: '#2B4965',
+              backgroundColor: '#FFF',
               minWidth: '360px',
               maxWidth: '420px',
             }}
           >
+            <Avatar style={{ height: '64px', width: '64px', }} src={fund?.profile.picUri} />
             <Box padding={2}>
               <Typography variant='subtitle1' fontWeight='bold'>{fund?.profile.name}</Typography>
-              <Typography variant='body2'>หมายเลข: {fund?.campScore.consistency}</Typography>
+              <Typography variant='body2' fontWeight='bold'>หมายเลข: {fund?.campScore.consistency}</Typography>
+              <Typography variant='body2' fontWeight='bold'>{fund?.tags[0]}</Typography>
             </Box>
           </Box>
           <Box pt={2} />
@@ -130,7 +131,7 @@ export const InvestExitModal = ({
           // disabled={!wasClicked}
           variant="contained" fullWidth color="secondary" size="large"
           sx={{
-            backgroundColor: mode === 'invest' ? '#F07645' : '#144E93',
+            backgroundColor: mode === 'invest' ? '#1976d2' : '#144E93',
             borderColor: mode === 'invest' ? '#A85230 !important' : 'inheried'
           }}
           onClick={submitHandler}>{mode === 'invest' ? 'ลงคะแนน' : 'Exit'}
