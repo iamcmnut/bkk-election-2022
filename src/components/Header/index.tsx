@@ -17,7 +17,7 @@ const Wrapper = styled(Box)`
   backdrop-filter: blur(4px)
 `
 export type Props = {
-  currPath: 'candidate' | 'result' 
+  currPath: 'candidate' | 'result'
   role: Role
   balance: number | undefined
   canTrade: boolean
@@ -67,7 +67,7 @@ export const Header = ({ role, onRoleChange, currPath, balance, canTrade, onRese
           </Box>
     </Box>
     <Box flexDirection='row' display='flex' alignItems='center'>
-      {/* <Box width={200}> <HeaderCoinBalance amount={balance} /></Box> */}
+      <Box width={430}> <HeaderCoinBalance amount={balance} /></Box>
       {/* <Box width={200} pl={2}>  <HeaderRole role={role} onChanged={onRoleChange} /></Box> */}
       <Box pl={2}><Button variant="contained" onClick={handleOpen}>Donate</Button></Box>
     </Box>

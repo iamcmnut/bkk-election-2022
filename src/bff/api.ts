@@ -90,16 +90,16 @@ export const investFundBff = async (
 
     if (!fund) throw new Error('Fund not found')
 
-    const { walletAddress: investorAddress } = userInvestor
+    // const { walletAddress: investorAddress } = userInvestor
 
-    if (!fund.followers.includes(investorAddress)) {
-      fund.followers.push(userInvestor.walletAddress)
-    }
+    // if (!fund.followers.includes(investorAddress)) {
+    //   fund.followers.push(userInvestor.walletAddress)
+    // }
 
-    const { copyingFunds, tokens: userTokens } = userInvestor.assets
+    // const { copyingFunds, tokens: userTokens } = userInvestor.assets
 
-    // remove usdt from user
-    removeTokenFromTokenAssets(userTokens, 'USDT', usdtAmount)
+    // // remove usdt from user
+    // removeTokenFromTokenAssets(userTokens, 'USDT', usdtAmount)
 
     // move usdt to copying fund
     // const copyingFund = copyingFunds.find((f) => f.fundAddress === fundAddress)
@@ -126,7 +126,7 @@ export const investFundBff = async (
       await vote(fund.campScore.consistency)
     } catch(err) {
 
-      const errMsg = (err as any).reason ? (err as any).reason : 'Unexpected Error'
+      const errMsg = (err as any).reason ? (err as any).reason : 'ยกเลิกการ vote'
 
       return {
         statusCode: 500,

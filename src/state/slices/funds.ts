@@ -342,7 +342,7 @@ const slice = createSlice({
       }
     })
     builder.addCase(investFund.fulfilled, (state, action) => {
-      state.isVoted = true
+      state.isVoted = action.payload.statusCode === 200
       if (action.payload.data) {
         state.topFunds = action.payload.data.funds
       }

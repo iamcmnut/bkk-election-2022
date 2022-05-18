@@ -47,8 +47,10 @@ const slice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(loadUserInvestor.fulfilled, (state, action) => {
       try {
-        client.setUserId(action.payload.data?.userId ?? null)
-        state.userId = action.payload.data?.userId
+        if (!state.userId || state.userId !== action.payload.data?.userId) {
+          client.setUserId(action.payload.data?.userId ?? null)
+          state.userId = action.payload.data?.userId
+        }
       } catch (e) {
         console.log(e)
       }

@@ -127,7 +127,7 @@ export const vote = async (no: number) => {
       const txNo = await electionContract.vote(ethers.BigNumber.from(no))
       return txNo
     } catch (err) {
-      console.log(err)
+      console.log('vote error', err)
       throw err
     }
   }
