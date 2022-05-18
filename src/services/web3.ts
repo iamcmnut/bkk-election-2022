@@ -7,19 +7,27 @@ import { AbiItem } from 'web3-utils'
 import contract from '../contracts/Election.json'
 import { Election } from '../contracts/typechain/Election'
 
-const contractAddress = "0x5fbdb2315678afecb367f032d93f642f64180aa3"
+const contractAddress = "0xC115b216a52E034e2CEf64488b94B94071cF3f74"
 const abi = contract.abi
 
-const chainID = 97
+// const chainID = 97
+// const targetChain = {
+//   chainName: 'BSC - Testnet',
+//   chainId: `0x${chainID.toString(16)}`,
+//   nativeCurrency: { name: 'BNB', decimals: 18, symbol: 'BNB' },
+//   rpcUrls: ['https://data-seed-prebsc-1-s1.binance.org:8545'],
+//   blockExplorerUrls: ['https://testnet.bscscan.com'],
+// }
+const chainID = 56
 const targetChain = {
-  chainName: 'BSC - Testnet',
+  chainName: 'BSC - Mainnet',
   chainId: `0x${chainID.toString(16)}`,
   nativeCurrency: { name: 'BNB', decimals: 18, symbol: 'BNB' },
-  rpcUrls: ['https://data-seed-prebsc-1-s1.binance.org:8545'],
-  blockExplorerUrls: ['https://testnet.bscscan.com'],
+  rpcUrls: ['https://bsc-dataseed1.binance.org'],
+  blockExplorerUrls: ['https://testnet.bscscan.com/'],
 }
 
-const web3 = new Web3(Web3.givenProvider || "https://data-seed-prebsc-1-s1.binance.org:8545")
+const web3 = new Web3(Web3.givenProvider || targetChain.rpcUrls[0])
 
 export const checkWalletIsConnected = async () => {
   const ethereum = (window as any).ethereum
@@ -42,7 +50,8 @@ export const checkWalletIsConnected = async () => {
 export const connectWalletHandler = async () => {
   const ethereum = (window as any).ethereum
   if (!ethereum) {
-    alert("Please install MetaMask")
+    // alert("Please install MetaMask")
+    return
   }
 
   try {
@@ -234,7 +243,7 @@ export const switchNetwork = async () => {
 export const connectAndSwitchNetwork = async () => {
   const ethereum = (window as any).ethereum
   if (!ethereum) {
-    alert("Please install MetaMask")
+    // alert("Please install MetaMask")
     return
   }
 
