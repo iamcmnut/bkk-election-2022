@@ -7,7 +7,7 @@ import { AbiItem } from 'web3-utils'
 import contract from '../contracts/Election.json'
 import { Election } from '../contracts/typechain/Election'
 
-const contractAddress = "0x5fbdb2315678afecb367f032d93f642f64180aa3"
+const contractAddress = "0x4FE16b69B96Bd84487320997a7Feb55079fbFfc9"
 const abi = contract.abi
 
 const chainID = 97
@@ -92,6 +92,7 @@ export const getCandidates = async ():Promise<string[]> => {
       console.log('Initialize getCandidate')
        const points = await electionContract.methods.getCandidates().call()
        console.log("points", points)
+       await delay(2000)
       return points
     } catch (err) {
       console.log(err)
@@ -266,4 +267,7 @@ export const connectAndSwitchNetwork = async () => {
       throw err
     }
   }
+}
+function delay(ms: number) {
+  return new Promise( resolve => setTimeout(resolve, ms) )
 }
