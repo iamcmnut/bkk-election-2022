@@ -22,7 +22,8 @@
     "react-ts-tradingview-widgets": "^1.0.8",
     "recharts": "^2.1.8",
     "uuid": "^8.3.2",
-    "web-vitals": "^1.0.1"
+    "web-vitals": "^1.0.1",
+    "web3": "^1.7.3"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^6.3.12",
