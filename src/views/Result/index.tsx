@@ -27,7 +27,7 @@ export const Result = (): JSX.Element | null => {
     void getCandidates().then(result => {
       const sortedCandidatess =
         [...candidates.map((c, i) =>
-          ({ ...c, campScore: { ...c.campScore, return: result[i].toNumber() } }))]
+          ({ ...c, campScore: { ...c.campScore, return: Number(result[i]) } }))]
           .sort((c1, c2) => c2.campScore.return - c1.campScore.return)
       setSortedCandidates(sortedCandidatess)
 

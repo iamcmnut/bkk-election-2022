@@ -1,21 +1,26 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 import { ethers } from 'ethers'
+import Web3 from 'web3'
+import { AbiItem } from 'web3-utils'
 
 import contract from '../contracts/Election.json'
 import { Election } from '../contracts/typechain/Election'
 
-const contractAddress = "0x4FE16b69B96Bd84487320997a7Feb55079fbFfc9"
+const contractAddress = "0x5fbdb2315678afecb367f032d93f642f64180aa3"
 const abi = contract.abi
 
-const chainID = 97
+const chainID = 31337
 const targetChain = {
-  chainName: 'BSC - Testnet',
+  chainName: 'Local',
   chainId: `0x${chainID.toString(16)}`,
-  nativeCurrency: { name: 'BNB', decimals: 18, symbol: 'BNB' },
-  rpcUrls: ['https://data-seed-prebsc-1-s1.binance.org:8545'],
-  blockExplorerUrls: ['https://testnet.bscscan.com'],
+  nativeCurrency: { name: 'ETH', decimals: 18, symbol: 'ETH' },
+  rpcUrls: ['http://localhost:8545'],
+  // blockExplorerUrls: ['https://testnet.bscscan.com'],
 }
+
+const provider = new Web3.providers.HttpProvider('http://localhost:8545"')
+const web3 = new Web3(Web3.givenProvider || "http://localhost:8545")
 
 export const checkWalletIsConnected = async () => {
   const ethereum = (window as any).ethereum
@@ -71,17 +76,23 @@ export const getCandidate = async (no: number):Promise<ethers.BigNumber> => {
   }
 }
 
-export const getCandidates = async ():Promise<ethers.BigNumber[]> => {
-  const ethereum = (window as any).ethereum
+export const getCandidates = async ():Promise<string[]> => {
+  const ethereum = web3.eth
+ 
   if (ethereum) {
-    const provider = new ethers.providers.Web3Provider(ethereum)
-    const signer = provider.getSigner()
-    const electionContract = new ethers.Contract(contractAddress, abi, signer) as Election
+    //const provider = new ethers.providers.Web3Provider(ethereum)
+    // ethereum.Contract(abi,contractAddress)
+   
+   // (new web3.eth.Contract(abi as any, contractAddress)) as Election
+  
+   // const signer = provider.getSigner()
+   console.log(ethereum)
+    const electionContract =  (new ethereum.Contract(abi as  AbiItem[] , contractAddress)) 
 
     try {
       console.log('Initialize getCandidate')
-      const points = await electionContract.getCandidates()
-      console.log("Points", points)
+       const points = await electionContract.methods.getCandidates().call()
+       console.log("points", points)
       return points
     } catch (err) {
       console.log(err)
@@ -90,6 +101,8 @@ export const getCandidates = async ():Promise<ethers.BigNumber[]> => {
   } else {
     throw new Error("Please install MetaMask")
   }
+
+
 }
 
 export const vote = async (no: number) => {
