@@ -73,17 +73,6 @@ export const InvestExitModal = ({
     }
   }
 
-  //function setAmount(event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>): void {
-  //   const re = /^[0-9\b]+$/
-  //   const amountValue = event.target.value
-  //   if (amountValue === '' || re.test(amountValue)) {
-  //     const amount = Number.parseFloat(amountValue)
-  //     const currentBalance = 100
-  //     setUserInvestAmount(amount > currentBalance ? currentBalance : amount)
-  //     setPercent(0)
-  //   }
-  // }
-
   const onAmountChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     const reg = /^[0-9]*[.,]?[0-9]*$/
     const preval = e.target.value
@@ -101,7 +90,7 @@ export const InvestExitModal = ({
       onClose={onClose}
       PaperProps={{
         style: {
-          backgroundColor: '#0B2C4D',
+          backgroundColor: '#FFF',
           borderRadius: '10px',
         }
       }}
@@ -122,98 +111,23 @@ export const InvestExitModal = ({
               maxWidth: '420px',
             }}
           >
-            <Avatar style={{ height: '64px', width: '64px', }}
-              src={fund?.profile.picUri}
-            />
+            <Avatar style={{ height: '64px', width: '64px', }} src={fund?.profile.picUri} />
             <Box padding={2}>
               <Typography variant='subtitle1' fontWeight='bold'>{fund?.profile.name}</Typography>
               <Typography variant='body2'>หมายเลข: {fund?.campScore.consistency}</Typography>
             </Box>
           </Box>
-          {/* <Typography pt={1} variant='subtitle1'>Current balance (USDT)</Typography> */}
-          {/* <Box
-            display='flex'
-            justifyContent='space-between'
-            alignItems='center'
-            sx={{
-              pr: 2,
-              pl: 2,
-              height: '50px',
-              border: '1.3px solid #FFFFFF',
-              borderRadius: '6.5px'
-            }}
-          >
-            <Typography variant='subtitle1' color='rgba(255, 255, 255, 0.5)'>Amount</Typography>
-            <Typography variant='h6' color='rgba(255, 255, 255, 0.5)'>
-              {totalUsdtBalance}
-            </Typography>
-          </Box> */}
-          {/* <Typography pt={2} variant='subtitle1'>Invested (USDT)</Typography> */}
-          {/* <Box
-            display='flex'
-            justifyContent='space-between'
-            alignItems='center'
-            sx={{
-              pr: 2,
-              pl: 2,
-              height: '50px',
-              border: '1.3px solid #FFFFFF',
-              borderRadius: '6.5px'
-            }}
-          >
-            <Typography variant='subtitle1' color='rgba(255, 255, 255, 0.5)'>Amount</Typography>
-            <Typography variant='h6' color='rgba(255, 255, 255, 0.5)'>
-              {totalInvestedUsdt}
-            </Typography>
-          </Box> */}
           <Box pt={2} />
           <Typography variant="subtitle1">ท่านต้องการใช้สิทธิ์เพียง 1 เดียวของท่าน</Typography>
           <Typography variant="subtitle1">เพื่อเลือกผู้สมัครรายนี้ใช่หรือไม่?</Typography>
-          {/* <OutlinedInput
-            sx={{
-              paddingRight: '0px',
-              borderRadius: '6.5px',
-              backgroundColor: 'rgba(255, 255, 255, 0.15)'
-            }}
-            startAdornment={<InputAdornment
-              position="start" sx={{ fontSize: '20px !important' }}>
-              Amount
-            </InputAdornment>}
-            endAdornment={<InputAdornment
-              position="end"
-              sx={{
-                border: 'none',
-                fontSize: '20px !important',
-                height: '3.9rem',
-                paddingLeft: '1rem', paddingRight: '1rem',
-                backgroundColor: '#073662',
-                maxHeight: 'inherit',
-                borderTopRightRadius: '6.5px',
-                borderBottomRightRadius: '6.5px',
-                WebkitTextFillColor: 'white',
-              }}>
-              USDT
-            </InputAdornment>}
-            aria-describedby="outlined-weight-helper-text"
-            inputProps={{
-              style: { textAlign: 'right', fontSize: '20px' },
-              pattern: '^[0-9]*[.,]?[0-9]*$',
-            }}
-            value={amount}
-            placeholder='0'
-            onChange={onAmountChange}
-          /> */}
           <Box pt={3} />
-          {/* <SpendPercentButtonGroup
-            onSelectPercent={setActionVolume}
-          /> */}
         </DialogContentText>
       </DialogContent >
       <DialogActions
         sx={{ p: 2 }}
       >
         <Button
-          disabled={!wasClicked}
+          // disabled={!wasClicked}
           variant="contained" fullWidth color="secondary" size="large"
           sx={{
             backgroundColor: mode === 'invest' ? '#F07645' : '#144E93',
