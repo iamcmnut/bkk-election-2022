@@ -110,16 +110,16 @@ export const FundManagerCard = ({ fund, onClickInvest, onClickExit, voteStatus }
         borderRadius: '10.2px'
       },
       '& .camp-score': {
-        fontFamily: 'Montserrat',
+        fontFamily: 'Kanit',
         fontStyle: 'normal',
         fontSize: '30px',
         fontWeight: 'bold',
         lineHeight: '40px',
       },
       '& .camp-score-label': {
-        fontFamily: 'Montserrat',
+        fontFamily: 'Kanit',
         fontStyle: 'normal',
-        fontSize: '10px',
+        fontSize: '14px',
         top: '-5px',
         position: 'relative'
       },
@@ -133,7 +133,8 @@ export const FundManagerCard = ({ fund, onClickInvest, onClickExit, voteStatus }
         left: '1.5rem',
         top: '-0.7rem',
         width: '5rem',
-        textAlign: 'center'
+        textAlign: 'center',
+        color: '#291F1E',
       },
 
       '& .wrap-favorite': {
@@ -176,11 +177,11 @@ export const FundManagerCard = ({ fund, onClickInvest, onClickExit, voteStatus }
       },
 
       '& .fund-content': {
-        marginTop: '40px'
+        marginTop: '15px'
       },
 
       '& .fund-content-row': {
-        display: 'flex',
+        display: 'block',
         justifyContent: 'space-between',
         alignItems: 'center',
         flexDirection: 'row',
@@ -191,6 +192,15 @@ export const FundManagerCard = ({ fund, onClickInvest, onClickExit, voteStatus }
         paddingLeft: '20px',
         paddingRight: '20px',
         paddingBottom: '20px'
+      },
+
+      '& .fund-name, .vote-button': {
+        fontFamily: 'Kanit',
+      },
+
+      '& .fund-name': {
+        fontSize: '1.3rem',
+        textAlign: 'center',
       }
 
     })
@@ -225,7 +235,6 @@ export const FundManagerCard = ({ fund, onClickInvest, onClickExit, voteStatus }
         </CardHeader> */}
         <CardMedia
           component="img"
-          height="400"
           image={fund.profile.picUri}
           alt="green iguana"
         >
@@ -234,7 +243,7 @@ export const FundManagerCard = ({ fund, onClickInvest, onClickExit, voteStatus }
         <CardContent className="fund-content" >
           <Box className='fund-content-row'>
             <Box>
-              <Typography noWrap variant="h6" color="text">
+              <Typography noWrap variant="h6" color="text" className='fund-name'>
                 {fund.profile.name}
               </Typography>
               {/* <Typography noWrap variant="subtitle2" color="primary">
@@ -242,7 +251,7 @@ export const FundManagerCard = ({ fund, onClickInvest, onClickExit, voteStatus }
               </Typography> */}
             </Box>
           </Box>
-          <Divider />
+          {/* <Divider /> */}
 
           {/* <Box className='fund-content-row'>
           {loading?<Skeleton animation="wave" width='50%' height={40} />: 
@@ -253,7 +262,7 @@ export const FundManagerCard = ({ fund, onClickInvest, onClickExit, voteStatus }
         </CardContent>
         <CardActions className='wrap-action' >
           <Button variant="contained" fullWidth onClick={() => onClickInvest(fund)} disabled={voteStatus !== "ready"}>
-            <Typography>{buttonMsg}</Typography>
+            <Typography className='vote-button'>{buttonMsg}</Typography>
           </Button>
         </CardActions>
       </Card>

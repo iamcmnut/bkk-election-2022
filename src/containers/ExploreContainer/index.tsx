@@ -48,7 +48,7 @@ export const ExploreContainer = ({ onClickInvest, onClickExit }: Input): JSX.Ele
     <Grid md={3} />
     <Grid container justifyContent='center' xs paddingX={3}>
       {topFunds.map((f: Fund) => (
-        <Grid item key={f.fundAddress} spacing={3} md={4}>
+        <Grid item key={f.fundAddress} spacing={3} md={3}>
           <Box >
             <FundManagerCard
               fund={f}

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState ,useEffect } from 'react'
 import { styled } from '@mui/system'
-import FavoriteIcon from '@mui/icons-material/Favorite'
+// import FavoriteIcon from '@mui/icons-material/Favorite'
 import {
   Card,
   CardContent,
@@ -104,7 +104,7 @@ export const CandidateCard = ({ fund, onClickInvest, onClickExit }: Props): JSX.
       '& .camp-score-label': {
         fontFamily: 'Montserrat',
         fontStyle: 'normal',
-        fontSize: '10px',
+        fontSize: '14px',
         top: '-5px',
         position: 'relative'
       },
