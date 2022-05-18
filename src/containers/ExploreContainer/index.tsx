@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Grid, IconButton, Typography, Box } from '@mui/material'
 import InfoIcon from '@mui/icons-material/Info'
@@ -6,24 +6,36 @@ import InfoIcon from '@mui/icons-material/Info'
 import { Fund } from '../../state/types'
 import { RootState } from '../../state/store'
 import { FundManagerCard } from '../../components/FundManagerCard'
+import { isVoted } from '../../services/web3'
 
 type Input = {
   onClickInvest: (f: Fund) => void
   onClickExit: (f: Fund) => void
 }
 export const ExploreContainer = ({ onClickInvest, onClickExit }: Input): JSX.Element | null => {
+
+  const [voteStatus, setVoteStatus] = useState('not-ready')
   const topFunds = useSelector((state: RootState) => state.funds.topFunds)
+  const voteSuccess = useSelector((state: RootState) => state.funds.isVoted)
 
   let headerMsg = 'ลงคะแนน'
-  const voteStatus = 'ready'
 
-  switch (voteStatus) {
+  useEffect(() => {
+    isVoted()
+      .then(voted => {
+      setVoteStatus(voted ? 'voted' : 'ready')
+    }).catch(e => console.error(e))
+  }, [])
+
+  const finalVoteStatus = voteSuccess ? 'voted' : voteStatus
+
+  switch (finalVoteStatus) {
     case "ready":
       headerMsg = 'ท่านมี 1 คะแนนสำหรับการโหวต'
       break
-    // case "voted":
-    //   headerMsg = 'ท่านได้ลงคะแนนโหวตแล้ว'
-    //   break
+    case "voted":
+      headerMsg = 'ท่านได้ลงคะแนนโหวตแล้ว'
+      break
     default:
       headerMsg = 'กำลังเชื่อมต่อ...'
       break
@@ -52,9 +64,12 @@ export const ExploreContainer = ({ onClickInvest, onClickExit }: Input): JSX.Ele
           <Box >
             <FundManagerCard
               fund={f}
-              onClickInvest={onClickInvest}
+              onClickInvest={(f) => {
+                setVoteStatus('voted')
+                onClickInvest(f)
+              }}
               onClickExit={onClickExit}
-              voteStatus={voteStatus}
+              voteStatus={finalVoteStatus}
             />
           </Box>
         </Grid>
