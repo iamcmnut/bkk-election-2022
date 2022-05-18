@@ -140,4 +140,5 @@ export type Candidate = {
   enable: boolean
   image: string
   thumbnail: string
+  party: string
 }

@@ -52,6 +52,7 @@ export const candidates: Candidate[] = [
     thumbnail: pic01 as string,
     votes: 0,
     enable: true,
+    party: 'พรรคก้าวไกล',
   },
   {
     number: 2,
@@ -60,6 +61,7 @@ export const candidates: Candidate[] = [
     thumbnail: pic02 as string,
     votes: 0,
     enable: true,
+    party: 'ผู้สมัครอิสระ',
   },
   {
     number: 3,
@@ -68,6 +70,7 @@ export const candidates: Candidate[] = [
     thumbnail: pic03 as string,
     votes: 0,
     enable: true,
+    party: 'ผู้สมัครอิสระ',
   },
   {
     number: 4,
@@ -76,6 +79,7 @@ export const candidates: Candidate[] = [
     thumbnail: pic04 as string,
     votes: 0,
     enable: true,
+    party: 'พรรคประชาธิปัตย์',
   },
   {
     number: 5,
@@ -84,6 +88,7 @@ export const candidates: Candidate[] = [
     thumbnail: pic05 as string,
     votes: 0,
     enable: true,
+    party: 'ผู้สมัครอิสระ',
   },
   {
     number: 6,
@@ -92,6 +97,7 @@ export const candidates: Candidate[] = [
     thumbnail: pic06 as string,
     votes: 0,
     enable: true,
+    party: 'ผู้สมัครอิสระ',
   },
   {
     number: 7,
@@ -100,6 +106,7 @@ export const candidates: Candidate[] = [
     thumbnail: pic07 as string,
     votes: 0,
     enable: true,
+    party: 'ผู้สมัครอิสระ',
   },
   {
     number: 8,
@@ -108,6 +115,7 @@ export const candidates: Candidate[] = [
     thumbnail: pic08 as string,
     votes: 0,
     enable: true,
+    party: 'ผู้สมัครอิสระ',
   },
   {
     number: 9,
@@ -116,6 +124,7 @@ export const candidates: Candidate[] = [
     thumbnail: pic09 as string,
     votes: 0,
     enable: true,
+    party: 'ผู้สมัครอิสระ',
   },
   {
     number: 10,
@@ -124,6 +133,7 @@ export const candidates: Candidate[] = [
     thumbnail: pic10 as string,
     votes: 0,
     enable: true,
+    party: 'ผู้สมัครอิสระ',
   },
   {
     number: 11,
@@ -132,6 +142,7 @@ export const candidates: Candidate[] = [
     thumbnail: pic11 as string,
     votes: 0,
     enable: true,
+    party: 'พรรคไทยสร้างไทย',
   },
   {
     number: 12,
@@ -140,6 +151,7 @@ export const candidates: Candidate[] = [
     thumbnail: pic12 as string,
     votes: 0,
     enable: true,
+    party: 'ผู้สมัครอิสระ',
   },
   {
     number: 13,
@@ -148,6 +160,7 @@ export const candidates: Candidate[] = [
     thumbnail: pic13 as string,
     votes: 0,
     enable: true,
+    party: 'ผู้สมัครอิสระ',
   },
   {
     number: 14,
@@ -156,6 +169,7 @@ export const candidates: Candidate[] = [
     thumbnail: pic14 as string,
     votes: 0,
     enable: true,
+    party: 'ผู้สมัครอิสระ',
   },
   {
     number: 15,
@@ -164,6 +178,7 @@ export const candidates: Candidate[] = [
     thumbnail: pic15 as string,
     votes: 0,
     enable: true,
+    party: 'ผู้สมัครอิสระ',
   },
   {
     number: 16,
@@ -172,6 +187,7 @@ export const candidates: Candidate[] = [
     thumbnail: pic16 as string,
     votes: 0,
     enable: true,
+    party: 'ผู้สมัครอิสระ',
   },
   {
     number: 17,
@@ -180,6 +196,7 @@ export const candidates: Candidate[] = [
     thumbnail: pic17 as string,
     votes: 0,
     enable: true,
+    party: 'ผู้สมัครอิสระ',
   },
   {
     number: 18,
@@ -188,6 +205,7 @@ export const candidates: Candidate[] = [
     thumbnail: pic18 as string,
     votes: 0,
     enable: true,
+    party: 'ผู้สมัครอิสระ',
   },
   {
     number: 19,
@@ -196,6 +214,7 @@ export const candidates: Candidate[] = [
     thumbnail: pic19 as string,
     votes: 0,
     enable: true,
+    party: 'ผู้สมัครอิสระ',
   },
   {
     number: 20,
@@ -204,6 +223,7 @@ export const candidates: Candidate[] = [
     thumbnail: pic20 as string,
     votes: 0,
     enable: true,
+    party: 'ผู้สมัครอิสระ',
   },
   {
     number: 21,
@@ -212,6 +232,7 @@ export const candidates: Candidate[] = [
     thumbnail: pic21 as string,
     votes: 0,
     enable: true,
+    party: 'ผู้สมัครอิสระ',
   },
   {
     number: 22,
@@ -220,6 +241,7 @@ export const candidates: Candidate[] = [
     thumbnail: pic22 as string,
     votes: 0,
     enable: true,
+    party: 'ผู้สมัครอิสระ',
   },
   {
     number: 23,
@@ -228,6 +250,7 @@ export const candidates: Candidate[] = [
     thumbnail: pic23 as string,
     votes: 0,
     enable: true,
+    party: 'ผู้สมัครอิสระ',
   },
   {
     number: 24,
@@ -236,6 +259,7 @@ export const candidates: Candidate[] = [
     thumbnail: pic24 as string,
     votes: 0,
     enable: true,
+    party: 'ผู้สมัครอิสระ',
   },
   {
     number: 25,
@@ -244,6 +268,7 @@ export const candidates: Candidate[] = [
     thumbnail: pic25 as string,
     votes: 0,
     enable: true,
+    party: 'ผู้สมัครอิสระ',
   },
   {
     number: 26,
@@ -252,6 +277,7 @@ export const candidates: Candidate[] = [
     thumbnail: pic26 as string,
     votes: 0,
     enable: true,
+    party: 'ผู้สมัครอิสระ',
   },
   {
     number: 27,
@@ -260,6 +286,7 @@ export const candidates: Candidate[] = [
     thumbnail: pic27 as string,
     votes: 0,
     enable: true,
+    party: 'ผู้สมัครอิสระ',
   },
   {
     number: 28,
@@ -268,6 +295,7 @@ export const candidates: Candidate[] = [
     thumbnail: pic28 as string,
     votes: 0,
     enable: true,
+    party: 'ผู้สมัครอิสระ',
   },
   {
     number: 29,
@@ -276,6 +304,7 @@ export const candidates: Candidate[] = [
     thumbnail: pic29 as string,
     votes: 0,
     enable: true,
+    party: 'พรรคประชากรไทย',
   },
   {
     number: 30,
@@ -284,6 +313,7 @@ export const candidates: Candidate[] = [
     thumbnail: pic30 as string,
     votes: 0,
     enable: true,
+    party: 'พรรคกรีน',
   },
   {
     number: 31,
@@ -292,6 +322,7 @@ export const candidates: Candidate[] = [
     thumbnail: pic31 as string,
     votes: 0,
     enable: true,
+    party: 'ผู้สมัครอิสระ',
   }
 ]
 
