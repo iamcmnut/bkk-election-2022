@@ -80,7 +80,7 @@ const slice = createSlice({
         if (investedFund) {
           state.notifications.push({
             id: uuid(),
-            text: `You've just invested (${action.meta.arg.usdtAmount} USDT) to "${investedFund.profile.name}" fund`,
+            text: `คุณได้ลงคะแนนให้กับ "${investedFund.profile.name}"`,
             wasShown: false,
             level: 'success'  })
         }

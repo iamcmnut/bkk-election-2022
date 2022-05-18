@@ -45,18 +45,16 @@ export const InvestExitModal = ({
   const [amount, setAmount] = useState('')
   const [userInvestAmount, setUserInvestAmount] = useState(0)
 
+  let wasClicked = false
+
   // const ctaEnabled = userInvestAmount > 0 &&
   //   (mode === 'invest' ? userInvestAmount <= totalUsdtBalance : userInvestAmount <= totalInvestedUsdt)
 
 
 
   const submitHandler = () => {
-    if (amount == '' || Number.isNaN(amount)) {
-      setAmount('')
-      return
-    }
-    const numberValue = Number(amount)
-    if (numberValue <= 0) return
+    wasClicked = true
+    const numberValue = 1
     console.log(userInvestAmount)
     onSubmit(numberValue, setUserInvestAmount)
   }
@@ -215,6 +213,7 @@ export const InvestExitModal = ({
         sx={{ p: 2 }}
       >
         <Button
+          disabled={!wasClicked}
           variant="contained" fullWidth color="secondary" size="large"
           sx={{
             backgroundColor: mode === 'invest' ? '#F07645' : '#144E93',

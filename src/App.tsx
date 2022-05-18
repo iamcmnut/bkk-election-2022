@@ -1,41 +1,32 @@
 import React, { useState, useCallback, useEffect } from 'react'
 import CssBaseline from '@mui/material/CssBaseline'
-import { useLocation } from 'react-router-dom'
+// import { useLocation } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { Routes, Route, Navigate } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import { Alert, Snackbar, ThemeProvider } from '@mui/material'
 
 import { HeaderContainer } from './containers/HeaderContainer'
 import { Explore } from './views/Explore'
-import { Swap } from './views/Swap'
-import { Port } from './views/Port'
 import { RootState } from './state/store'
 import { loadTopFunds, loadUserInvestor, loadRewardData } from './state/api-actions'
 import { markAsShown } from './state/slices/notification'
-import { dark } from './theme/dark'
 import { light } from './theme/light'
 import { CampCssBaseline } from './theme/CampCssBaseline'
-import { ProgressTrackingDrawer } from './components/ProgressTrackingDrawer'
-import { Trade } from './views/Trade'
-import { FundDashboard } from './views/FundDashboard'
-import { startAutoFill } from './bff/auto-fill'
 import { CongratDialog } from './components/CongratDialog'
-import { startAutoManageFunds } from './bff/auto-manage-funds'
-import { Candidate } from './views/Candidate'
 import { Result } from './views/Result'
 
 export const App = (): JSX.Element => {
   const dispatch = useDispatch()
 
-  const { pathname } = useLocation()
-  const currPath = (pathname.split('/')?.[1] ?? 'explore')
+  // const { pathname } = useLocation()
+  // const currPath = (pathname.split('/')?.[1] ?? 'explore')
 
   const { notifications } = useSelector((state: RootState) => state.notification)
-  const isInvestorLoading = useSelector((state: RootState) => !state.investor.currentInvestor)
-  const hasOwnFund = useSelector((state: RootState) =>
-    !!state.investor.currentInvestor?.assets?.ownFunds
-    && state.investor.currentInvestor.assets.ownFunds.length > 0
-  )
+  // const isInvestorLoading = useSelector((state: RootState) => !state.investor.currentInvestor)
+  // const hasOwnFund = useSelector((state: RootState) =>
+  //   !!state.investor.currentInvestor?.assets?.ownFunds
+  //   && state.investor.currentInvestor.assets.ownFunds.length > 0
+  // )
 
   const role = useSelector((state: RootState) => state.investor.role)
   const notiMessage = notifications.find((n) => !n.wasShown)
