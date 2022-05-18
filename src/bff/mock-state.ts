@@ -82,7 +82,7 @@ const generateCandidate = (candidate: Candidate): Fund => {
       tokens: [{ symbol: 'USDT', amount: 1e6 }], // TODO: random USDT size later
     },
     invested: 1e6,
-    tags: ['#TOP10'], // TODO: random tags later
+    tags: [candidate.party], // TODO: random tags later
     profile: {
       name: candidate.name, // TODO: random name
       picUri: candidate.image,

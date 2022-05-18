@@ -97,6 +97,7 @@ export const InvestExitModal = ({
       BackdropProps={{ style: { backgroundColor: 'rgba(244, 238, 255, 0.6)' } }}
     >
       <DialogContent>
+        <Avatar style={{ height: '64px', width: '64px', }} src={fund?.profile.picUri} />
         < DialogContentText>
           <Box
             display='flex'
@@ -111,7 +112,6 @@ export const InvestExitModal = ({
               maxWidth: '420px',
             }}
           >
-            <Avatar style={{ height: '64px', width: '64px', }} src={fund?.profile.picUri} />
             <Box padding={2}>
               <Typography variant='subtitle1' fontWeight='bold'>{fund?.profile.name}</Typography>
               <Typography variant='body2'>หมายเลข: {fund?.campScore.consistency}</Typography>

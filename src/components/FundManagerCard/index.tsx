@@ -201,7 +201,11 @@ export const FundManagerCard = ({ fund, onClickInvest, onClickExit, voteStatus }
       '& .fund-name': {
         fontSize: '1.3rem',
         textAlign: 'center',
-      }
+      },
+
+      '& .candidate-tag': {
+        textAlign: 'center',
+      },
 
     })
   )
@@ -246,9 +250,9 @@ export const FundManagerCard = ({ fund, onClickInvest, onClickExit, voteStatus }
               <Typography noWrap variant="h6" color="text" className='fund-name'>
                 {fund.profile.name}
               </Typography>
-              {/* <Typography noWrap variant="subtitle2" color="primary">
+              <Typography noWrap variant="subtitle2" color="primary" className='candidate-tag'>
                 {fund.tags}
-              </Typography> */}
+              </Typography>
             </Box>
           </Box>
           {/* <Divider /> */}
