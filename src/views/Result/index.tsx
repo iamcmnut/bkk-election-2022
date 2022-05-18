@@ -12,7 +12,7 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 import { FundManagerCard } from '../../components/FundManagerCard'
 import { Fund } from '../../state/types'
@@ -22,6 +22,7 @@ import { CandidateCard } from '../../components/CandidateCard'
 import { loadVoteResult } from '../../state/api-actions'
 
 export const Result = (): JSX.Element | null => {
+  const dispatch = useDispatch()
   const [sortedCandidates, setSortedCandidates] = useState<Fund[]>([])
   const candidates = useSelector((state: RootState) => state.funds.topFunds)
 
@@ -130,8 +131,3 @@ export const Result = (): JSX.Element | null => {
     </TableContainer>
   </Box>
 }
-
-function dispatch(loadVoteResult: any) {
-    throw new Error('Function not implemented.')
-}
-

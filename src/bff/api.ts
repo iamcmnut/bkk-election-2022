@@ -25,9 +25,11 @@ const stupidClone = <T>(obj: T): T => JSON.parse(JSON.stringify(obj)) as T
 
 export const loadUserInvestorBff = async (): Promise<BffResponse<Investor>> => {
   const acc = await connectAndSwitchNetwork()
+  const { userInvestor } = getState()
+  userInvestor.userId = acc
   return {
     statusCode: 200,
-    data: stupidClone({ userId: acc } as Investor),
+    data: stupidClone(userInvestor),
   }
 }
 

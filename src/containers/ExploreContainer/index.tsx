@@ -64,10 +64,7 @@ export const ExploreContainer = ({ onClickInvest, onClickExit }: Input): JSX.Ele
           <Box >
             <FundManagerCard
               fund={f}
-              onClickInvest={(f) => {
-                setVoteStatus('voted')
-                onClickInvest(f)
-              }}
+              onClickInvest={onClickInvest}
               onClickExit={onClickExit}
               voteStatus={finalVoteStatus}
             />
