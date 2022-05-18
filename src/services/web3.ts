@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ethers } from 'ethers'
 import Web3 from 'web3'
 import { AbiItem } from 'web3-utils'
@@ -262,6 +263,26 @@ export const connectAndSwitchNetwork = async () => {
         })
       }
 
+      console.log(err)
+      throw err
+    }
+  }
+}
+
+export const isVoted = async () => {
+  const ethereum = (window as any).ethereum
+
+  if (ethereum) {
+    const provider = new ethers.providers.Web3Provider(ethereum)
+    const signer = provider.getSigner()
+    const electionContract = new ethers.Contract(contractAddress, abi, signer) as Election
+
+    try {
+      console.log('Initialize checkRights')
+      const available = await electionContract.checkRights()
+      console.log("checkRights", available)
+      return !available
+    } catch (err) {
       console.log(err)
       throw err
     }

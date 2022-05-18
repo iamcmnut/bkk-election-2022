@@ -41,8 +41,8 @@ import {
 } from '../api-actions'
 import { Candidate, Fund } from '../types'
 
-type TopFundsState = { topFunds: Fund[] }
-const initialState: TopFundsState = { topFunds: [] }
+type TopFundsState = { topFunds: Fund[], isVoted: boolean }
+const initialState: TopFundsState = { topFunds: [], isVoted: false }
 
 export const candidates: Candidate[] = [
   {
@@ -342,6 +342,7 @@ const slice = createSlice({
       }
     })
     builder.addCase(investFund.fulfilled, (state, action) => {
+      state.isVoted = true
       if (action.payload.data) {
         state.topFunds = action.payload.data.funds
       }
