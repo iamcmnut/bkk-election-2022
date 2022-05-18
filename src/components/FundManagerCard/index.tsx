@@ -26,13 +26,28 @@ import { getCandidate } from '../../services/web3'
 
 export type Props = {
   fund: Fund,
+  voteStatus?: string,
   onClickInvest: (f: Fund) => void
   onClickExit: (f: Fund) => void
 }
 
-export const FundManagerCard = ({ fund, onClickInvest, onClickExit }: Props): JSX.Element => {
+export const FundManagerCard = ({ fund, onClickInvest, onClickExit, voteStatus }: Props): JSX.Element => {
   const [loading,setLoading] = useState(true)
   const [isFavorite, setFavorite] = useState(false)
+
+  let buttonMsg = 'ลงคะแนน'
+
+  switch (voteStatus) {
+    case "ready":
+      buttonMsg = 'ลงคะแนน'
+      break
+    case "voted":
+      buttonMsg = 'ลงคะแนนแล้ว'
+      break
+    default:
+      buttonMsg = 'กำลังเชื่อมต่อ...'
+      break
+  }
  
 
 
@@ -237,8 +252,8 @@ export const FundManagerCard = ({ fund, onClickInvest, onClickExit }: Props): JS
           </Box> */}
         </CardContent>
         <CardActions className='wrap-action' >
-          <Button variant="contained" fullWidth onClick={() => onClickInvest(fund)}>
-            <Typography>ลงคะแนน</Typography>
+          <Button variant="contained" fullWidth onClick={() => onClickInvest(fund)} disabled={voteStatus !== "ready"}>
+            <Typography>{buttonMsg}</Typography>
           </Button>
         </CardActions>
       </Card>

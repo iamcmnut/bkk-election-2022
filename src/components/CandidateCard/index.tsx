@@ -81,7 +81,7 @@ export const CandidateCard = ({ fund, onClickInvest, onClickExit }: Props): JSX.
         left: '1.5rem',
         padding: '0.5rem',
         width: '4rem',
-        background: '#F07645',
+        background: '#B1740F',
         color: 'white',
         textAlign: 'center',
         fontFamily: '\'Roboto\', sans-serif',

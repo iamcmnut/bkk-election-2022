@@ -1,5 +1,5 @@
 import { Order, Fund, Role, Investor, Market, RewardProgress, RewardSubmitForm } from '../state/types'
-import { connectAndSwitchNetwork } from '../services/web3'
+import { connectAndSwitchNetwork, vote } from '../services/web3'
 
 import { generateMarkets, getState, reset, save } from './mock-state'
 import { generateFollowers } from './generate-followers'
@@ -101,24 +101,37 @@ export const investFundBff = async (
     removeTokenFromTokenAssets(userTokens, 'USDT', usdtAmount)
 
     // move usdt to copying fund
-    const copyingFund = copyingFunds.find((f) => f.fundAddress === fundAddress)
-    if (copyingFund) {
-      addTokenToTokenAssets(copyingFund.assets.tokens, 'USDT', usdtAmount)
-      copyingFund.invested += usdtAmount
-    } else {
-      userInvestor.assets.copyingFunds.push({
-        invested: usdtAmount,
-        fundAddress,
-        assets: {
-          tokens: [
-            { symbol: 'USDT', amount: usdtAmount },
-          ],
-        },
-        orders: [],
-      })
-    }
+    // const copyingFund = copyingFunds.find((f) => f.fundAddress === fundAddress)
+    // if (copyingFund) {
+      
+    //   addTokenToTokenAssets(copyingFund.assets.tokens, 'USDT', usdtAmount)
+    //   copyingFund.invested += usdtAmount
+    // } else {
+    //   userInvestor.assets.copyingFunds.push({
+    //     invested: usdtAmount,
+    //     fundAddress,
+    //     assets: {
+    //       tokens: [
+    //         { symbol: 'USDT', amount: usdtAmount },
+    //       ],
+    //     },
+    //     orders: [],
+    //   })
+    // }
 
-    rewardTracking.copyFund += 1
+    // rewardTracking.copyFund += 1
+
+    try {
+      await vote(fund.campScore.consistency)
+    } catch(err) {
+      
+      const errMsg = (err as any).reason ? (err as any).reason : 'Unexpected Error'
+
+      return {
+        statusCode: 500,
+        error: new Error(errMsg),
+      }
+    }
 
     save()
 

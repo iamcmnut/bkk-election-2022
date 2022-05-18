@@ -49,7 +49,7 @@ export const Header = ({ role, onRoleChange, currPath, balance, canTrade, onRese
     <Box flexDirection='row' display='flex' alignItems='center'>
       {/* <Box width={200}> <HeaderCoinBalance amount={balance} /></Box> */}
       {/* <Box width={200} pl={2}>  <HeaderRole role={role} onChanged={onRoleChange} /></Box> */}
-      <Box pl={2}><Button variant="contained" onClick={() => onResetState()}>Connect</Button></Box>
+      {/* <Box pl={2}><Button variant="contained" onClick={() => onResetState()}>Connect</Button></Box> */}
     </Box>
   </Wrapper >
 
