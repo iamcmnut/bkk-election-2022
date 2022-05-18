@@ -14,7 +14,6 @@ import {
   loadUserInvestorBff,
   loadRewardDataBff,
   placeOrderBff,
-  resetBff,
   submitRewardBff,
   showCongratulationsBff,
 } from '../bff/api'
@@ -113,6 +112,13 @@ export const loadManagerDashboard = createAsyncThunk(
   },
 )
 
+export const loadVoteResult = createAsyncThunk(
+  'apis/voteResult',
+  async () => {
+    return 'loadVoteResult'
+  },
+)
+
 export const loadExplorePage = createAsyncThunk(
   'apis/visitExplorePage',
   async () => {
@@ -140,8 +146,7 @@ export const loadRewardData = createAsyncThunk(
 export const resetState = createAsyncThunk(
   'apis/resetState',
   async () => {
-    const response = await resetBff()
-    return response
+    return 'reset'
   },
 )
 

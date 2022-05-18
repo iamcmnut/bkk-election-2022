@@ -3,28 +3,17 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import {
   investFund,
-  exitFund,
-  createFund,
-  deleteFund,
-  placeOrder,
   loadUserInvestor,
-  loadManagerDashboard,
   loadExplorePage,
-  loadPortfolio,
+  loadVoteResult,
   resetState,
 } from '../api-actions'
 
 const events = {
-  investFund: 'invest fund',
-  exitFund: 'exit fund',
-  createFund: 'create fund',
-  deleteFund: 'delete fund',
-  placeOrder: 'place order',
-  submitBasicReward: 'submit basic reward',
-  visitFundDashboard: 'visit fund dashboard',
-  visitExplorePage: 'visit explore page',
-  visitPortfolio: 'visit portfolio',
-  resetState: 'reset state',
+  investFund: 'vote',
+  visitExplorePage: 'visit vote page',
+  visitVoteResult: 'visit vote result',
+  resetState: 'donate',
 }
 
 type AnalyticsState = {
@@ -40,6 +29,7 @@ type BasicRewardArgs = {
 const amplitudeKey = '5b311bb401471f5264ada45fc338772f'
 const client = amplitude.getInstance()
 client.init(amplitudeKey)
+client.setVersionName('bkk-vote-2022')
 const initialState: AnalyticsState = {
   isBasicRewardSubmitted: false,
 }
@@ -48,12 +38,8 @@ const slice = createSlice({
   name: 'analytics',
   initialState,
   reducers: {
-    submitBasicReward: (state: AnalyticsState, action: PayloadAction<BasicRewardArgs>) => {
+    submitBasicReward: (state: AnalyticsState) => {
       if (!state.isBasicRewardSubmitted) {
-        const data = action.payload
-        client.logEvent(events.submitBasicReward, {
-          ...data
-        })
         state.isBasicRewardSubmitted = true
       }
     },
@@ -61,10 +47,8 @@ const slice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(loadUserInvestor.fulfilled, (state, action) => {
       try {
-        if (!state.userId || state.userId !== action.payload.data?.userId) {
-          client.setUserId(action.payload.data?.userId ?? null)
-          state.userId = action.payload.data?.userId
-        }
+        client.setUserId(action.payload.data?.userId ?? null)
+        state.userId = action.payload.data?.userId
       } catch (e) {
         console.log(e)
       }
@@ -76,44 +60,9 @@ const slice = createSlice({
         console.log(e)
       }
     })
-    builder.addCase(exitFund.fulfilled, () => {
+    builder.addCase(loadVoteResult.fulfilled, () => {
       try {
-        client.logEvent(events.exitFund)
-      } catch (e) {
-        console.log(e)
-      }
-    })
-    builder.addCase(createFund.fulfilled, () => {
-      try {
-        client.logEvent(events.createFund)
-      } catch (e) {
-        console.log(e)
-      }
-    })
-    builder.addCase(deleteFund.fulfilled, () => {
-      try {
-        client.logEvent(events.deleteFund)
-      } catch (e) {
-        console.log(e)
-      }
-    })
-    builder.addCase(placeOrder.fulfilled, () => {
-      try {
-        client.logEvent(events.placeOrder)
-      } catch (e) {
-        console.log(e)
-      }
-    })
-    builder.addCase(loadManagerDashboard.fulfilled, () => {
-      try {
-        client.logEvent(events.visitFundDashboard)
-      } catch (e) {
-        console.log(e)
-      }
-    })
-    builder.addCase(loadPortfolio.fulfilled, () => {
-      try {
-        client.logEvent(events.visitPortfolio)
+        client.logEvent(events.visitVoteResult)
       } catch (e) {
         console.log(e)
       }

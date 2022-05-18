@@ -19,10 +19,15 @@ import { Fund } from '../../state/types'
 import { RootState } from '../../state/store'
 import { getCandidates } from '../../services/web3'
 import { CandidateCard } from '../../components/CandidateCard'
+import { loadVoteResult } from '../../state/api-actions'
 
 export const Result = (): JSX.Element | null => {
   const [sortedCandidates, setSortedCandidates] = useState<Fund[]>([])
   const candidates = useSelector((state: RootState) => state.funds.topFunds)
+
+  useEffect(() => {
+    dispatch(loadVoteResult())
+  }, [])
 
   useEffect(() => {
     void getCandidates().then(result => {
@@ -124,5 +129,9 @@ export const Result = (): JSX.Element | null => {
       </Table>
     </TableContainer>
   </Box>
+}
+
+function dispatch(loadVoteResult: any) {
+    throw new Error('Function not implemented.')
 }
 

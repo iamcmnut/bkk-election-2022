@@ -43,6 +43,7 @@ export const checkWalletIsConnected = async () => {
 
   if (accounts.length !== 0) {
     console.log("Found an account address: ", accounts[0])
+    return accounts[0]
   } else {
     console.log("No account found")
   }
@@ -87,16 +88,16 @@ export const getCandidate = async (no: number):Promise<ethers.BigNumber> => {
 
 export const getCandidates = async ():Promise<string[]> => {
   const ethereum = web3.eth
- 
+
   if (ethereum) {
     //const provider = new ethers.providers.Web3Provider(ethereum)
     // ethereum.Contract(abi,contractAddress)
-   
+
    // (new web3.eth.Contract(abi as any, contractAddress)) as Election
-  
+
    // const signer = provider.getSigner()
    console.log(ethereum)
-    const electionContract =  (new ethereum.Contract(abi as  AbiItem[] , contractAddress)) 
+    const electionContract =  (new ethereum.Contract(abi as  AbiItem[] , contractAddress))
 
     try {
       console.log('Initialize getCandidate')
@@ -251,6 +252,7 @@ export const connectAndSwitchNetwork = async () => {
   try {
     const account = await ethereum.request({ method: 'eth_requestAccounts' })
     console.log("Found an account address: ", account[0])
+    return account[0]
   } catch (err) {
     console.log(err)
   }

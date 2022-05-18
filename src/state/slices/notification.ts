@@ -9,7 +9,6 @@ import {
   investFund,
   placeOrder,
   loadTopFunds,
-  resetState,
 } from '../api-actions'
 import { NotificationMsg } from '../types'
 
@@ -150,24 +149,6 @@ const slice = createSlice({
             level: 'success'
           })
         }
-        return
-      }
-
-      if (action.payload.error instanceof Error) {
-        state.notifications.push({ id: uuid(), text: action.payload.error.message, wasShown: false, level: 'error'  })
-        return
-      }
-
-      state.notifications.push({ id: uuid(), text: 'unknown error', wasShown: false, level: 'error'  })
-    })
-    builder.addCase(resetState.fulfilled, (state, action) => {
-      if (action.payload.data) {
-        state.notifications.push({
-          id: uuid(),
-          text: 'All fake data was reset!',
-          wasShown: false,
-          level: 'success'
-        })
         return
       }
 

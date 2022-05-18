@@ -24,11 +24,10 @@ type BffResponse<T> = {
 const stupidClone = <T>(obj: T): T => JSON.parse(JSON.stringify(obj)) as T
 
 export const loadUserInvestorBff = async (): Promise<BffResponse<Investor>> => {
-  void connectAndSwitchNetwork()
-  const { userInvestor } = getState()
+  const acc = await connectAndSwitchNetwork()
   return {
     statusCode: 200,
-    data: stupidClone(userInvestor),
+    data: stupidClone({ userId: acc } as Investor),
   }
 }
 
@@ -103,7 +102,7 @@ export const investFundBff = async (
     // move usdt to copying fund
     // const copyingFund = copyingFunds.find((f) => f.fundAddress === fundAddress)
     // if (copyingFund) {
-      
+
     //   addTokenToTokenAssets(copyingFund.assets.tokens, 'USDT', usdtAmount)
     //   copyingFund.invested += usdtAmount
     // } else {
@@ -124,7 +123,7 @@ export const investFundBff = async (
     try {
       await vote(fund.campScore.consistency)
     } catch(err) {
-      
+
       const errMsg = (err as any).reason ? (err as any).reason : 'Unexpected Error'
 
       return {

@@ -184,11 +184,7 @@ export const ProgressTrackingDrawer = (): JSX.Element | null => {
       telegramId: form.telegramId,
       twitterAccount: form.twitterAccount
     }))
-    dispatch(submitBasicReward({
-      walletAddress: form.walletAddress,
-      twitterId: form.twitterAccount,
-      telegramId: form.telegramId,
-    }))
+    dispatch(submitBasicReward())
 
 
   }
