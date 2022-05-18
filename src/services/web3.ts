@@ -199,7 +199,7 @@ export const switchNetwork = async () => {
       })
     } catch (err) {
 
-      if ((err as any).code === 4902) {
+      if ((err as any).code === 4902 || (err as any).code === -32603) {
         ethereum.request({
           method: 'wallet_addEthereumChain',
           params: [
@@ -241,7 +241,7 @@ export const connectAndSwitchNetwork = async () => {
       })
     } catch (err) {
 
-      if ((err as any).code === 4902) {
+      if ((err as any).code === 4902 || (err as any).code === -32603) {
         ethereum.request({
           method: 'wallet_addEthereumChain',
           params: [
