@@ -1,6 +1,7 @@
 import React from 'react'
 import { Box, Button, Link, Typography } from '@mui/material'
 import { styled } from '@mui/material/styles'
+import Modal from '@mui/material/Modal'
 
 import logo from '../../assets/bkk_election_logo.png'
 import { Role } from '../../state/types'
@@ -26,6 +27,25 @@ export type Props = {
 export const Header = ({ role, onRoleChange, currPath, balance, canTrade, onResetState }: Props):
   JSX.Element => {
 
+  const style = {
+    position: 'absolute' as 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  }
+
+  const [open, setOpen] = React.useState(false)
+  const handleOpen = () => {
+    setOpen(true)
+    onResetState()
+  }
+  const handleClose = () => setOpen(false)
+
   return <Wrapper
     alignItems='center'
     display='flex'
@@ -49,8 +69,23 @@ export const Header = ({ role, onRoleChange, currPath, balance, canTrade, onRese
     <Box flexDirection='row' display='flex' alignItems='center'>
       {/* <Box width={200}> <HeaderCoinBalance amount={balance} /></Box> */}
       {/* <Box width={200} pl={2}>  <HeaderRole role={role} onChanged={onRoleChange} /></Box> */}
-      <Box pl={2}><Button variant="contained" onClick={() => onResetState()}>Donate</Button></Box>
+      <Box pl={2}><Button variant="contained" onClick={handleOpen}>Donate</Button></Box>
     </Box>
+    <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            สนับสนุนโครงการ  🙏
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }} style={{ fontSize: '0.9rem' }}>
+            0x691A9d8d0f0Fe1101bD8150f9511fE45504433fC
+          </Typography>
+        </Box>
+      </Modal>
   </Wrapper >
 
 }
