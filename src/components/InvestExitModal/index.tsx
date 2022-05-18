@@ -215,8 +215,6 @@ export const InvestExitModal = ({
         sx={{ p: 2 }}
       >
         <Button
-          disabled={amount == '' || Number.isNaN(amount) || Number(amount) <= 0}
-
           variant="contained" fullWidth color="secondary" size="large"
           sx={{
             backgroundColor: mode === 'invest' ? '#F07645' : '#144E93',
