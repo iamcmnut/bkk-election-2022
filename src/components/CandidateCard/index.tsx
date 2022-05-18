@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState ,useEffect } from 'react'
 import { styled } from '@mui/system'
-import FavoriteIcon from '@mui/icons-material/Favorite'
+// import FavoriteIcon from '@mui/icons-material/Favorite'
 import {
   Card,
   CardContent,
@@ -63,6 +63,7 @@ export const CandidateCard = ({ fund, onClickInvest, onClickExit }: Props): JSX.
       background: '#01203D',
       boxShadow: '1px 1px 10px rgba(113, 99, 203, 0.5)',
       borderRadius: 10,
+      fontFamily: 'Kanit',
 
       '&::before': {
         position: 'absolute',
@@ -81,7 +82,7 @@ export const CandidateCard = ({ fund, onClickInvest, onClickExit }: Props): JSX.
         left: '1.5rem',
         padding: '0.5rem',
         width: '4rem',
-        background: '#B1740F',
+        background: '#F07645',
         color: 'white',
         textAlign: 'center',
         fontFamily: '\'Roboto\', sans-serif',
@@ -95,16 +96,16 @@ export const CandidateCard = ({ fund, onClickInvest, onClickExit }: Props): JSX.
         borderRadius: '10.2px'
       },
       '& .camp-score': {
-        fontFamily: 'Montserrat',
+        fontFamily: 'Kanit',
         fontStyle: 'normal',
         fontSize: '30px',
         fontWeight: 'bold',
         lineHeight: '40px',
       },
       '& .camp-score-label': {
-        fontFamily: 'Montserrat',
+        fontFamily: 'Kanit',
         fontStyle: 'normal',
-        fontSize: '10px',
+        fontSize: '14px',
         top: '-5px',
         position: 'relative'
       },
@@ -118,7 +119,8 @@ export const CandidateCard = ({ fund, onClickInvest, onClickExit }: Props): JSX.
         left: '1.5rem',
         top: '-0.7rem',
         width: '5rem',
-        textAlign: 'center'
+        textAlign: 'center',
+        color: '#291F1E',
       },
 
       '& .wrap-favorite': {
@@ -161,11 +163,11 @@ export const CandidateCard = ({ fund, onClickInvest, onClickExit }: Props): JSX.
       },
 
       '& .fund-content': {
-        marginTop: '40px'
+        marginTop: '10px'
       },
 
       '& .fund-content-row': {
-        display: 'flex',
+        display: 'block',
         justifyContent: 'space-between',
         alignItems: 'center',
         flexDirection: 'row',
@@ -175,8 +177,24 @@ export const CandidateCard = ({ fund, onClickInvest, onClickExit }: Props): JSX.
         justifyContent: 'space-between',
         paddingLeft: '20px',
         paddingRight: '20px',
-        paddingBottom: '20px'
-      }
+        paddingBottom: '20px',
+        display: 'block',
+      },
+
+      '& .fund-name, .vote-button': {
+        fontFamily: 'Kanit',
+      },
+
+      '& .fund-name': {
+        fontSize: '1.3rem',
+        textAlign: 'center',
+      },
+
+      '& .candidate-vote': {
+        fontSize: '1.3rem',
+        textAlign: 'center',
+        fontFamily: 'Kanit',
+      },
 
     })
   )
@@ -210,7 +228,7 @@ export const CandidateCard = ({ fund, onClickInvest, onClickExit }: Props): JSX.
         </CardHeader> */}
         <CardMedia
           component="img"
-          height="400"
+          height="300"
           image={fund.profile.picUri}
           alt="green iguana"
         >
@@ -219,15 +237,13 @@ export const CandidateCard = ({ fund, onClickInvest, onClickExit }: Props): JSX.
         <CardContent className="fund-content" >
           <Box className='fund-content-row'>
             <Box>
-              <Typography noWrap variant="h6" color="text">
+              <Typography noWrap variant="h6" color="text" className='fund-name'>
                 {fund.profile.name}
               </Typography>
-              <Typography noWrap variant="subtitle2" color="primary">
-                {fund.tags}
-              </Typography>
+              
             </Box>
           </Box>
-          <Divider />
+          {/* <Divider /> */}
 
           {/* <Box className='fund-content-row'>
           {loading?<Skeleton animation="wave" width='50%' height={40} />: 
@@ -238,7 +254,7 @@ export const CandidateCard = ({ fund, onClickInvest, onClickExit }: Props): JSX.
         </CardContent>
         <CardActions className='wrap-action' >
        
-            <Typography>{fund.campScore.return} คะแนน</Typography>
+            <Typography className='candidate-vote'>{fund.campScore.return.toLocaleString('en')} คะแนน</Typography>
          
         </CardActions>
       </Card>

@@ -33,7 +33,7 @@ export const ExploreContainer = ({ onClickInvest, onClickExit }: Input): JSX.Ele
 
   return <Grid container justifyContent="center" alignItems="center">
     <Grid md={3} /><Grid md={6} sx={{ textAlign: 'center' }}>
-      <Typography variant="h4" mt={8}>
+      <Typography variant="h4" mt={8} style={{ fontFamily: 'Kanit' }}>
         รายชื่อผู้ลงสมัคร
         <IconButton aria-label="info" color="secondary" size="small" >
           <InfoIcon fontSize="inherit" />
@@ -43,12 +43,12 @@ export const ExploreContainer = ({ onClickInvest, onClickExit }: Input): JSX.Ele
     <Grid item md={3} />
     <Grid item md={3} />
     <Grid md={6} sx={{ textAlign: 'center' }}>
-      <Typography variant="h5" mt={5} mb={6}>{headerMsg}</Typography>
+      <Typography variant="h5" mt={5} mb={6} style={{ fontFamily: 'Kanit' }}>{headerMsg}</Typography>
     </Grid>
     <Grid md={3} />
     <Grid container justifyContent='center' xs paddingX={3}>
       {topFunds.map((f: Fund) => (
-        <Grid item key={f.fundAddress} spacing={3} md={4}>
+        <Grid item key={f.fundAddress} spacing={3} md={3}>
           <Box >
             <FundManagerCard
               fund={f}

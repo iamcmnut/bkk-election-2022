@@ -11,8 +11,8 @@ import { HeaderRole } from '../HeaderRole'
 const Wrapper = styled(Box)`
   height:80px;
   alignItems:'center';
-  padding-left:50px;
-  padding-right:50px;
+  padding-left:10px;
+  padding-right:10px;
   backdrop-filter: blur(4px)
 `
 export type Props = {
@@ -31,25 +31,25 @@ export const Header = ({ role, onRoleChange, currPath, balance, canTrade, onRese
     display='flex'
     flexDirection='row'
     justifyContent='space-between'
-    style={{ backgroundColor:  '#082746' }}
+    style={{ backgroundColor: '#082746', fontFamily: 'Kanit' }}
   >
     <Box flexDirection='row' display='flex' alignItems='center'>
       <img src={logo as string} height={34} />
-      <Box width={40} />
+      <Box width={30} />
       <Box flexDirection='row' display='flex' alignItems='center'>
             <Link href="/candidate" className={currPath === 'candidate' ? 'link active' : 'link'}>
-              <Typography variant="h6">ผู้สมัคร</Typography>
+              <Typography variant="h6" style={{ fontFamily: 'Kanit', fontSize: '1rem' }}>ผู้สมัคร</Typography>
             </Link>
             <Box width={20} />
           <Link href="/result" className={currPath === 'result' ? 'link active' : 'link'}>
-              <Typography variant="h6">ผลโหวต</Typography>
+              <Typography variant="h6" style={{ fontFamily: 'Kanit', fontSize: '1rem' }}>ผลโหวต</Typography>
             </Link>
           </Box>
     </Box>
     <Box flexDirection='row' display='flex' alignItems='center'>
       {/* <Box width={200}> <HeaderCoinBalance amount={balance} /></Box> */}
       {/* <Box width={200} pl={2}>  <HeaderRole role={role} onChanged={onRoleChange} /></Box> */}
-      {/* <Box pl={2}><Button variant="contained" onClick={() => onResetState()}>Connect</Button></Box> */}
+      <Box pl={2}><Button variant="contained" onClick={() => onResetState()}>Donate</Button></Box>
     </Box>
   </Wrapper >
 
