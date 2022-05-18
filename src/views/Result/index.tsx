@@ -4,6 +4,7 @@ import {
   Box,
   Grid,
   Paper,
+  Skeleton,
   Table,
   TableBody,
   TableCell,
@@ -36,7 +37,29 @@ export const Result = (): JSX.Element | null => {
   }, [candidates])
 
 
-  if (!candidates || candidates.length == 0 || !sortedCandidates || sortedCandidates.length == 0) return null
+  if (!candidates || candidates.length == 0 || !sortedCandidates || sortedCandidates.length == 0)
+    return <Box style={{ fontFamily: 'Kanit' }}>
+      <Grid container justifyContent="center">
+        <Grid item p={0}>
+          <Skeleton animation="wave"
+            width={300} height={600} style={{ padding: 0 }} />
+        </Grid>
+        <Grid container justifyContent="center" spacing={6}>
+          <Skeleton animation="wave"
+            width={300} height={600} />
+          <Box p={3} />
+          <Skeleton animation="wave"
+            width={300} height={600} />
+        </Grid>
+      </Grid>
+
+      <Box paddingX={3}>
+        <Skeleton animation="wave"
+          width='100%' height={1000} />
+      </Box>
+    </Box>
+
+
 
 
 
