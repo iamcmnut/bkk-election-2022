@@ -250,11 +250,11 @@ export const connectAndSwitchNetwork = async () => {
   }
 
   let error = undefined
+  let account = undefined
 
   try {
-    const account = await ethereum.request({ method: 'eth_requestAccounts' })
+    account = await ethereum.request({ method: 'eth_requestAccounts' })
     console.log("Found an account address: ", account[0])
-    return account[0]
   } catch (err) {
     error = err
   }
@@ -284,6 +284,8 @@ export const connectAndSwitchNetwork = async () => {
       throw err
     }
   }
+
+  return account[0]
 }
 
 export const isVoted = async () => {
