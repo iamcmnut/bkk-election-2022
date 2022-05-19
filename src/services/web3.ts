@@ -249,13 +249,18 @@ export const connectAndSwitchNetwork = async () => {
     return
   }
 
+  let error = undefined
+
   try {
     const account = await ethereum.request({ method: 'eth_requestAccounts' })
     console.log("Found an account address: ", account[0])
     return account[0]
   } catch (err) {
-    console.log(err)
-    throw new Error('Cannot connect to MetaMask')
+    error = err
+  }
+
+  if (error) {
+    throw error
   }
 
   if (ethereum.networkVersion !== chainID) {
