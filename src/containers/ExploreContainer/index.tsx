@@ -54,7 +54,7 @@ export const ExploreContainer = ({ onClickInvest, onClickExit }: Input): JSX.Ele
     {/* <Grid md={3} /> */}
     <Grid md={12} sm={12} columns={12} xs={12} sx={{ textAlign: 'center' }}>
       <Typography variant="h4" mt={8} style={{ fontFamily: 'Kanit' }}>
-        รายชื่อผู้ลงสมัคร
+        ทดลองโหวตผู้ว่าผ่าน Blockchain
         <IconButton aria-label="info" color="secondary" size="small" >
           <InfoIcon fontSize="inherit" />
         </IconButton>
