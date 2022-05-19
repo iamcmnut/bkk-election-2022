@@ -41,8 +41,8 @@ export const Header = ({ role, onRoleChange, currPath, balance, canTrade, onRese
 
   const [open, setOpen] = React.useState(false)
   const handleOpen = () => {
-    setOpen(true)
     onResetState()
+    setOpen(true)
   }
   const handleClose = () => setOpen(false)
 
