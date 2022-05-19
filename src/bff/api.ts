@@ -24,13 +24,21 @@ type BffResponse<T> = {
 const stupidClone = <T>(obj: T): T => JSON.parse(JSON.stringify(obj)) as T
 
 export const loadUserInvestorBff = async (): Promise<BffResponse<Investor>> => {
-  const acc = await connectAndSwitchNetwork()
   const { userInvestor } = getState()
-  userInvestor.userId = acc
-  return {
-    statusCode: 200,
-    data: stupidClone(userInvestor),
+  const res: BffResponse<Investor> = {
+    statusCode: 500,
   }
+  try {
+    const acc = await connectAndSwitchNetwork()
+    userInvestor.userId = acc
+    res.data = userInvestor
+    res.statusCode = 200
+  } catch (err) {
+    res.statusCode = 500
+    res.error = err
+  }
+
+  return res
 }
 
 export const loadTopFundsBff = async (): Promise<BffResponse<Fund[]>> => {

@@ -245,7 +245,7 @@ export const switchNetwork = async () => {
 export const connectAndSwitchNetwork = async () => {
   const ethereum = (window as any).ethereum
   if (!ethereum) {
-    // alert("Please install MetaMask")
+    throw new Error('Please connect to MetaMask')
     return
   }
 
@@ -255,6 +255,7 @@ export const connectAndSwitchNetwork = async () => {
     return account[0]
   } catch (err) {
     console.log(err)
+    throw new Error('Cannot connect to MetaMask')
   }
 
   if (ethereum.networkVersion !== chainID) {
