@@ -210,22 +210,6 @@ export const CandidateCard = ({ fund, onClickInvest, onClickExit }: Props): JSX.
             หมายเลข
           </Typography>
         </Box>
-        {/* <CardHeader className='wrap-favorite'
-          action={
-            <IconButton aria-label="add to favorites" component="span" className="favorite-color"
-              onClick={() => {
-                toggleFavorite(isFavorite)
-              }}
-            >
-              <FavoriteIcon />
-            </IconButton>
-          }
-        // title={<Box className='wrap-cover'  >
-        //   <img src={whaleHunter as string} className='cover' />
-        // </Box>}
-        >
-
-        </CardHeader> */}
         <CardMedia
           component="img"
           height="300"
@@ -253,9 +237,10 @@ export const CandidateCard = ({ fund, onClickInvest, onClickExit }: Props): JSX.
           </Box> */}
         </CardContent>
         <CardActions className='wrap-action' >
-       
-            <Typography className='candidate-vote'>{fund.campScore.return.toLocaleString('en')} คะแนน</Typography>
-         
+            <Typography className='candidate-vote'>
+              {fund.campScore.risk.toLocaleString('en')} %
+              ({fund.campScore.return.toLocaleString('en')} คะแนน)
+            </Typography>
         </CardActions>
       </Card>
     </FundCard>)

@@ -24,6 +24,7 @@ import { loadVoteResult } from '../../state/api-actions'
 export const Result = (): JSX.Element | null => {
   const dispatch = useDispatch()
   const [sortedCandidates, setSortedCandidates] = useState<Fund[]>([])
+  const [totalVotes, setTotalVotes] = useState<number>(0)
   const candidates = useSelector((state: RootState) => state.funds.topFunds)
 
   useEffect(() => {
@@ -36,7 +37,20 @@ export const Result = (): JSX.Element | null => {
         [...candidates.map((c, i) =>
           ({ ...c, campScore: { ...c.campScore, return: Number(result[i]) } }))]
           .sort((c1, c2) => c2.campScore.return - c1.campScore.return)
+
+      let tVotes = 0
+
+      for (const c of sortedCandidatess) {
+        tVotes += c.campScore.return
+      }
+
+      for (const c of sortedCandidatess) {
+        c.campScore.risk = (c.campScore.return / tVotes) * 100
+        c.campScore.risk = Math.round(c.campScore.risk * 100) / 100
+      }
+
       setSortedCandidates(sortedCandidatess)
+      setTotalVotes(tVotes)
 
       console.log(sortedCandidatess)
     })
@@ -69,23 +83,14 @@ export const Result = (): JSX.Element | null => {
 
 
 
-  return <Box padding={5} style={{ fontFamily: 'Kanit' }}>
+  return <Box padding={5} style={{ fontFamily: 'Kanit', textAlign: 'center' }}>
+    <h1>มีผู้มาใช้สิทธิทั้งหมด</h1>
+    <h1>{totalVotes} คน</h1>
+    <h2>บัตรเสียทั้งหมด 0 ใบ</h2>
     <Grid container justifyContent="center">
       <CandidateCard fund={
         sortedCandidates[0]
       } onClickInvest={function (f: Fund): void {
-        throw new Error('Function not implemented.')
-      }} onClickExit={function (f: Fund): void {
-        throw new Error('Function not implemented.')
-      }} />
-    </Grid>
-    <Grid container justifyContent="center">
-      <CandidateCard fund={sortedCandidates[1]} onClickInvest={function (f: Fund): void {
-        throw new Error('Function not implemented.')
-      }} onClickExit={function (f: Fund): void {
-        throw new Error('Function not implemented.')
-      }} />
-      <CandidateCard fund={sortedCandidates[2]} onClickInvest={function (f: Fund): void {
         throw new Error('Function not implemented.')
       }} onClickExit={function (f: Fund): void {
         throw new Error('Function not implemented.')
@@ -99,24 +104,28 @@ export const Result = (): JSX.Element | null => {
             <TableCell width='10px' size='small' style={{ fontFamily: 'Kanit' }}>อันดับ</TableCell>
             <TableCell width='30px' size='small'></TableCell>
             <TableCell style={{ fontFamily: 'Kanit' }}>ชื่อผู้สมัคร</TableCell>
+            <TableCell align="right" style={{ fontFamily: 'Kanit' }}>เปอร์เซ็นต์</TableCell>
             <TableCell align="right" style={{ fontFamily: 'Kanit' }}>หมายเลข</TableCell>
             <TableCell align="right" style={{ fontFamily: 'Kanit' }}>คะแนน</TableCell>
           </TableRow>
         </TableHead>
         <TableBody style={{ fontFamily: 'Kanit' }}>
-          {sortedCandidates.filter((e, i) => i > 2).map((c, i2) => (
+          {sortedCandidates.filter((e, i) => i >= 0).map((c, i2) => (
             <TableRow
               key={`candi_${i2}`}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell size='small' align='center'>
-                {i2 + 4}
+                {i2 + 1}
               </TableCell>
               <TableCell  size='small' >
                 <Avatar src={c.profile.picUri}></Avatar>
               </TableCell>
               <TableCell style={{ fontFamily: 'Kanit' }}>
                 {c.profile.name}
+              </TableCell>
+              <TableCell align="right" style={{ fontFamily: 'Kanit' }}>
+                {c.campScore.risk} %
               </TableCell>
               <TableCell align="right" style={{ fontFamily: 'Kanit' }}>
                 {c.campScore.consistency}
